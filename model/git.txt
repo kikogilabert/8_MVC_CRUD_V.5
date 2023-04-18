@@ -1,0 +1,2 @@
+git checkout HEAD~4
+git branch -f main HEAD~3
