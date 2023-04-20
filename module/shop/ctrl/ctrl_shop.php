@@ -203,6 +203,8 @@
                 case 'control_likes':
                     $token = $_POST['token'];
                     $id_car = $_POST['id_car'];
+                    // echo json_encode($id_car);
+                    // exit;
             
                     try {
                         $json = decode_token($token);

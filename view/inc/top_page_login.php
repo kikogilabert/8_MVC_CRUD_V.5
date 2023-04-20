@@ -57,7 +57,7 @@
         	});
 	    </script>
 	    <link href="view/assets/css/style.css" rel="stylesheet" type="text/css" />
-	    <script src="module/shop/model/ctrl_shop.js"></script>
+	    <!-- <script src="module/shop/model/ctrl_shop.js"></script> -->
         <!-- SEARCH -->
         <script src="module/search/model/ctrl_search.js"></script>
         <!-- LOGIN -->

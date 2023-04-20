@@ -1,6 +1,8 @@
 console.log('holaaa');
 function login() {
     if (validate_login() != 0) {
+        var id_car = localStorage.getItem('id_car');
+        console.log(id_car);
         var data = $('#login__form').serialize();
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=login', 'POST', 'JSON', data)
             .then(function(result) {
@@ -13,10 +15,10 @@ function login() {
                     localStorage.setItem("token", result);
                     toastr.success("Loged succesfully");
 
-                    if (localStorage.getItem('redirect_like')) {
-                        setTimeout(' window.location.href = "index.php?page=ctrl_home&op=list"; ', 1000);
+                    if (id_car) {
+                        window.location.href = "index.php?page=ctrl_shop&op=list_shop"
                     } else {
-                        setTimeout(' window.location.href = "index.php?page=ctrl_home&op=list"; ', 1000);
+                      window.location.href = "index.php?page=ctrl_home&op=list";
                     }
                 }
             }).catch(function(textStatus) {
@@ -70,6 +72,7 @@ function validate_login() {
         return 0;
     }
 }
+    
 
 $(document).ready(function() {
     key_login();

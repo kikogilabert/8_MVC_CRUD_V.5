@@ -1,6 +1,7 @@
 function loadCars(total_prod = 0, items_page = 3) {
 // console.log(total_prod);
 // console.log(items_page);
+console.log('carga load cars');
 //  //FILTERS-HOME  
   var brand_filter =  JSON.parse(localStorage.getItem('filter_brand')) || false;
   var category_filter =  JSON.parse(localStorage.getItem('filter_category')) || false;
@@ -12,8 +13,8 @@ function loadCars(total_prod = 0, items_page = 3) {
   //FILTERS-TRENDING CARS HOME
   var car_carrusel =  JSON.parse(localStorage.getItem('filter_car')) || false;
   //REDIRECT LIKE
-  var redirect  =  localStorage.getItem('redirect_like') || false;
-  console.log(redirect);
+  var id_car  =  localStorage.getItem('id_car') || false;
+  // console.log(redirect);
 
   if(brand_filter != false) {
     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filters", brand_filter, total_prod, items_page );
@@ -27,11 +28,11 @@ function loadCars(total_prod = 0, items_page = 3) {
     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filters",  search_filter, total_prod, items_page );
   }else if (filter != false) {
     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=filters", filter,  total_prod, items_page );
-  } else if (redirect != false) {
-    console.log('tamo dentro');
-    redirect_login_like();
+  } else if (id_car) {
+    console.log('elseif');
+    loadDetails(id_car);
   }else {
-    console.log('GALARDOOOOOOOOOOOOOOON');
+    // console.log('GALARDOOOOOOOOOOOOOOON');
     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_cars", undefined, total_prod, items_page );
   } 
 }
@@ -167,7 +168,9 @@ function visitor_counter(car_plate){
 
 
 
-function loadDetails(car_plate){ 
+function loadDetails(car_plate){
+  // console.log('DETALLES DESDE EL MUNADO JNFIOAWHJFUIWAFA');
+  $('#content_shop_cars').empty();
   ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=details_car&id=' + car_plate, 'GET', 'JSON')
     .then(function (data) {
       console.log(data);
@@ -205,7 +208,7 @@ function loadDetails(car_plate){
           "<div class='list_product_details'>" +
           "<div class='product-info_details'>" +
           "<div class='product-content_details'>" +
-          "<h1><b class='placement'>" + data[0].cod_brand + " " + data[0].name_model +"<div id='" + data[0].car_plate + "' class='list_heart'></div>"+ "</b></h1>" +
+          "<h1><b class='placement'>" + data[0].cod_brand + " " + data[0].name_model +"<div id='" + data[0].car_plate + "' class='details_heart'></div>"+ "</b></h1>" +
           "<hr class=hr-shop>" +
           "<table class='details_table'> <tr>" +
           "<td>" + "CAR PLATE:   " + data[0].car_plate + "</td>"+ "</tr>"  +
@@ -241,16 +244,25 @@ function loadDetails(car_plate){
           next: '.glider-next'
         }
       });
-
+    
+      id_car = localStorage.getItem('id_car') || false;
+      if (id_car){
+        // $('#content_shop_cars').empty();
+        // $('.paginationcss').empty();
+        // $('.title_content').empty();
+        // $('.page').empty();
+        // console.log('dentro de id car');
+        click_like(car_plate, "details");
+        localStorage.removeItem('id_car');
+      }
+          load_likes_user();
+      
+      
       mapBox(data);
 
       more_cars_related(data[0].motor_type);
-      load_likes_user();
-      // console.log('esto que cojones es');
-      // console.log(data[0].motor_type);
-
-
-
+      
+     
     }).catch(function () {
       // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
     });
@@ -500,9 +512,6 @@ function cars_related(loadeds = 0, type_car, total_items) {
   let total_item = total_items;
   ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=cars_related', 'POST', 'JSON', { 'type': type, 'loaded': loaded, 'items': items })
       .then(function(data) {
-        console.log(data); //AQUI TENGO LOS 3 COCHES
-        console.log(loaded);
-        // console.log(loaded);
           if (loaded == 0) {
               $('<div></div>').attr({ 'id': 'title_content', class: 'title_content' }).appendTo('.results')
                   .html(
@@ -567,16 +576,16 @@ function more_cars_related(type_car) {
   var items = 0;
   ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=count_cars_related', 'POST', 'JSON', { 'type_car': type_car })
       .then(function(data) {
-        console.log(data);
+        // console.log(data);
           var total_items = data[0].n_prod;
-          console.log(total_items);
+          // console.log(total_items);
           cars_related(0, type_car, total_items);
           $(document).on("click", '.load_more_button', function() {
               items = items + 3;
               $('.more_car__button').empty();
-              console.log(items);
-              console.log(type_car);
-              console.log(total_items);
+              // console.log(items);
+              // console.log(type_car);
+              // console.log(total_items);
               cars_related(items, type_car, total_items);
           });
       }).catch(function() {
@@ -647,28 +656,26 @@ function pagination(filter) {
 
 function click_like(id_car, lugar) {
   var token = localStorage.getItem('token');
-  // console.log(token);
-  // console.log(id_car);
-  // console.log(lugar);
+  console.log(token);
+  console.log(id_car);
+  console.log(lugar);
   if (token) {
-      // console.log("dentro del if");
       ajaxPromise( "module/shop/ctrl/ctrl_shop.php?op=control_likes", 'POST', 'JSON', { 'id_car': id_car, 'token': token })
         .then(function (data){
             console.log(data);
-            $("#" + id_car + ".list_heart").toggleClass('is-active');
+            if(lugar === "details"){
+              // console.log('dentro del if de details alberto');
+              $("#" + id_car + ".details_heart").toggleClass('is-active');
+            }else{
+              $("#" + id_car + ".list_heart").toggleClass('is-active');
+            }
+            
           }).catch(function() {
               // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function click_like SHOP";
               console.log('DONA ERROR');
           });
   } else {
-      
-      const redirect = [];
-      redirect.push(id_car, lugar);
-
-      localStorage.setItem('redirect_like', redirect);
       localStorage.setItem('id_car', id_car);
-      console.log('estamos en el else');
-
       toastr.warning("Debes de iniciar session");
       setTimeout("location.href = 'index.php?page=ctrl_login&op=list';", 2000);
   }
@@ -677,14 +684,20 @@ function click_like(id_car, lugar) {
 function load_likes_user() {
   // console.log("hola");
   var token = localStorage.getItem('token');
-  console.log(token);
+  // var id_car = localStorage.getItem('id_car');
+  // console.log(token);
+  // console.log(id_car);
   if (token) {
-    console.log("denntro de load likes if");
+    // console.log("dentro de load likes if");
       ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=load_likes_user", 'POST', 'JSON', { 'token': token }) 
           .then(function(data) {
             console.log(data);
               for (row in data) {
-                  $("#" + data[row].car_plate + ".list_heart").toggleClass('is-active');
+                //YOLANDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                //MIRA ESTA MILLORA
+                $("#" + data[row].car_plate + ".details_heart").toggleClass('is-active');  
+                $("#" + data[row].car_plate + ".list_heart").toggleClass('is-active');
+
               }
           }).catch(function() {
               // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function load_like_user SHOP";
@@ -693,20 +706,6 @@ function load_likes_user() {
   }
 }
 
-function redirect_login_like() {
-  var redirect = localStorage.getItem('redirect_like').split(",");
-  console.log(redirect[1]);
-  if (redirect[1] == "details") {
-      loadDetails(redirect[0]);
-      localStorage.removeItem('redirect_like');
-      console.log('quitandolo de local storage')
-      localStorage.removeItem('page');
-  } else if (redirect[1] == "list_all") {
-      localStorage.removeItem('redirect_like');
-      console.log('quitandolo de local storage')
-      loadCars();
-  }
-}
 
 $(document).ready(function () {
   loadCars();
