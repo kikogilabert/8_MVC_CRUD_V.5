@@ -253,7 +253,8 @@ function loadDetails(car_plate){
         // $('.page').empty();
         // console.log('dentro de id car');
         click_like(car_plate, "details");
-        localStorage.removeItem('id_car');
+        
+        setTimeout(function(){localStorage.removeItem('id_car')}, 2000); 
       }
           load_likes_user();
       

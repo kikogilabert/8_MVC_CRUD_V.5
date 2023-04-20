@@ -76,6 +76,9 @@
 
              <!-- ACTIVITY USER -->
     <script src="view/js/activity_user.js"></script>
+        <!-- EMOTES -->
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     
     </head>
     <body>
