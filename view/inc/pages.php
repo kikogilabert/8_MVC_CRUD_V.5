@@ -15,10 +15,17 @@ if(isset($_GET['page'])){
 		case "ctrl_login";
 			include("module/login/ctrl/".$_GET['page'].".php");
 			break;
-		// case "controller_cars";
-		// 	include("module/user/controller/".$_GET['page'].".php");
+
+		case "ctrl_cart";
+			include("module/cart/ctrl/".$_GET['page'].".php");
+			break;
+
+		// case "ctrl_cart";
+		// include("module/home/ctrl/".$_GET['page'].".php");
+		// 	// include("module/cart/ctrl/".$_GET['page'].".php");
 		// 	break;
 
+			
 		case "services";
 			include("module/services/".$_GET['page'].".php");
 			break;
@@ -62,9 +69,9 @@ if(isset($_GET['page'])){
 			include("view/inc/error".$_GET['page'].".php");
 			break;
 			
-		default;
-			include("module/home/ctrl/index.php");
-			break;
+		// default;
+		// 	include("module/home/ctrl/index.php");
+		// 	break;
 	}
 }else{
 	include("module/home/ctrl/ctrl_home.php");

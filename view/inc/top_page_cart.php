@@ -57,12 +57,9 @@
         	});
 	    </script> -->
 	    <link href="view/assets/css/style.css" rel="stylesheet" type="text/css" />
-	    
+	    <script src="module/cart/model/ctrl_cart.js"></script>
         <!-- SEARCH -->
         <script src="module/search/model/ctrl_search.js"></script>
-            <!-- CART -->
-            <!-- <script src="module/cart/model/ctrl_cart.js"></script> -->
-
 
         <!-- PAGINATION -->
         <!-- <script type="text/javascript" src="http://botmonster.com/jquery-bootpag/jquery.bootpag.js"></script>
@@ -82,10 +79,9 @@
          <!-- ACTIVITY USER -->
     <script src="view/js/activity_user.js"></script>
     <script src="model/middleware_auth.php"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
             <!-- EMOTES -->
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
             <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-            <script src="module/shop/model/ctrl_shop.js"></script>
     </head>
     <body>

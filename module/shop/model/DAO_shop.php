@@ -257,6 +257,8 @@ function select_likes($id_car, $username){
 function like($id_car, $username){
 	$sql = "INSERT INTO likes (id_user, car_plate) VALUES ((SELECT  u.id_user FROM users u WHERE u.username= '$username') ,'$id_car');";
 	$conexion = connect::con();
+	// echo json_encode($sql);
+	// exit;
 $res = mysqli_query($conexion, $sql);
 	connect::close($conexion);
 	return $res;

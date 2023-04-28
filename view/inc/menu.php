@@ -64,7 +64,7 @@
             <div id="search_auto"></div>
             <input type="button" value="search" id="search-btn" class="btna third" style="display: inline;"/>
             
-            </div>
+    </div>
     <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
         <li class="nav-item">
@@ -81,6 +81,13 @@
           <li class="nav-item">
             <div id="des_inf_user"></div>
           </li>
+          <li></li>
+          <li class="nav-item">
+            <div class="cart-shop"></div>
+          </li>
         </ul>
     </div>
+    <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+    
+  </div>
   </nav>

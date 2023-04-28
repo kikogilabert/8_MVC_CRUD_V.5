@@ -32,7 +32,6 @@ console.log('carga load cars');
     console.log('elseif');
     loadDetails(id_car);
   }else {
-    // console.log('GALARDOOOOOOOOOOOOOOON');
     ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_cars", undefined, total_prod, items_page );
   } 
 }
@@ -108,8 +107,9 @@ function ajaxForSearch(url, filters, total_prod, items_page) {
               "<li>" + "COLOR:   "  + data[row].color + "</li>" +
               "<li>" + "PRICE:   "  + data[row].price + '€' + "</li>" +
               "<li class='botones'>" +"<div>" +
+              "<a class='button-85' id='" + data[row].car_plate +"' href='#'>Add to Cart</a>" + "&nbsp; &nbsp;" +
               "<button id='" + data[row].car_plate + "' class='more_info_list' >More Info</button>" +
-              "<button class='button buy' >Buy</button>" +
+              // "<button class='button buy' >Buy</button>" +
               "</div>" +
               "</ul>" +
               "</div>" +
@@ -144,18 +144,27 @@ function clicks() {
   });
 
 
-  $(document).on("click",".list_heart", function() {
+  $(document).on("click",".list_heart", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
     var car_plate = this.getAttribute('id');
     click_like(car_plate, "list_all");
     // console.log(car_plate);
   });
 
+  $(document).one( "click",".details_heart", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+      var car_plate = this.getAttribute('id');
+      loadDetails(car_plate);
+      console.log(car_plate);
+    $(this).off('click'); 
+});
+$(document).on("click", ".button-85", function () {
+  var car_plate = this.getAttribute('id');
+ add_cart(car_plate);
+});
 
-  $(document).on("click",".details_heart", function() {
-    var car_plate = this.getAttribute('id');
-    click_like(car_plate, "details")
-    console.log(car_plate);
-  });
 
 }
 function visitor_counter(car_plate){
@@ -254,7 +263,9 @@ function loadDetails(car_plate){
         // console.log('dentro de id car');
         click_like(car_plate, "details");
         
-        setTimeout(function(){localStorage.removeItem('id_car')}, 2000); 
+        setTimeout(function(){
+          localStorage.removeItem('id_car')
+        }, 2000); 
       }
           load_likes_user();
       
@@ -265,7 +276,7 @@ function loadDetails(car_plate){
       
      
     }).catch(function () {
-      // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
+      console.log('catch');
     });
 }
 
@@ -332,7 +343,6 @@ function print_filters() {
 }
 
 function filter_button() {
-  // console.log("hola");
   //Filtro motor_type
   $(function(){
   $('.filter_motortype_shop').change(function () {
@@ -410,8 +420,6 @@ $(function(){
     else {
       ajaxForSearch("module/shop/ctrl/ctrl_shop.php?op=all_cars");
     }
-    // highlight(filter);
-    // location.reload();
 
   });
 }
@@ -506,7 +514,6 @@ function highlightFilters() {
 }
 
 function cars_related(loadeds = 0, type_car, total_items) {
-  // console.log('esto que cojones es 2');
   let items = 3;
   let loaded = loadeds;
   let type = type_car;
@@ -558,7 +565,6 @@ function cars_related(loadeds = 0, type_car, total_items) {
                           "</br><button class='btn-notexist' id='btn-notexist'></button>"
                       )
               } else {
-                // console.log('en el else');
                   $('.more_car__button').empty();
                   $('<div></div>').attr({ 'id': 'more_car__button', 'class': 'more_car__button' }).appendTo('.title_content')
                       .html(
@@ -573,20 +579,14 @@ function cars_related(loadeds = 0, type_car, total_items) {
 
 function more_cars_related(type_car) {
   var type_car = type_car;
-  // console.log(type_car);
   var items = 0;
   ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=count_cars_related', 'POST', 'JSON', { 'type_car': type_car })
       .then(function(data) {
-        // console.log(data);
           var total_items = data[0].n_prod;
-          // console.log(total_items);
           cars_related(0, type_car, total_items);
           $(document).on("click", '.load_more_button', function() {
               items = items + 3;
               $('.more_car__button').empty();
-              // console.log(items);
-              // console.log(type_car);
-              // console.log(total_items);
               cars_related(items, type_car, total_items);
           });
       }).catch(function() {
@@ -595,15 +595,8 @@ function more_cars_related(type_car) {
 }
 
 function pagination(filter) {
-// console.log('esto es el filter', filter);
-// var filter = JSON.parse(localStorage.getItem('filter'));
-// let filtros_shop = filter;
     var filters_search = JSON.parse(localStorage.getItem('filters_search'));
     var filter_home = JSON.parse(localStorage.getItem('filter_category')) || JSON.parse(localStorage.getItem('filter_brand')) || JSON.parse(localStorage.getItem('filter_motortype')) ;
-
-    // console.log('esto es el filter_home', filter_home);
-    // console.log('esto es el filters_search', filters_search);
-    // console.log('esto es el filter', filter);
   
   if (filters_search) {
     var url = "module/shop/ctrl/ctrl_shop.php?op=count_filters_search";
@@ -617,21 +610,14 @@ function pagination(filter) {
     var url = "module/shop/ctrl/ctrl_shop.php?op=count_filters_shop";
   
   } else {
-
-    // console.log('elseselslelselselslelsleslelelssin_');
     var url = "module/shop/ctrl/ctrl_shop.php?op=count";
   }
 // console.log(filter_home.value);
   ajaxPromise(url, 'POST', 'JSON', {'filter': filter, 'filter_home': filter_home, 'filters_search': filters_search })
       .then(function(data) {
-        // console.log(data);
-        // console.log(url);
           var total_prod = data[0].counts;
-          // console.log('coches:', total_prod);
-
           if (total_prod >= 3) {
               total_pages = Math.ceil(total_prod / 3)
-              // console.log(total_pages);
           } else {
               total_pages = 1;
           }
@@ -657,23 +643,22 @@ function pagination(filter) {
 
 function click_like(id_car, lugar) {
   var token = localStorage.getItem('token');
-  console.log(token);
-  console.log(id_car);
-  console.log(lugar);
-  if (token) {
+  if (token){
       ajaxPromise( "module/shop/ctrl/ctrl_shop.php?op=control_likes", 'POST', 'JSON', { 'id_car': id_car, 'token': token })
         .then(function (data){
             console.log(data);
+            console.log('esto es del click like');
+           //YOLANDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            //MIRA ESTA MILLORA
             if(lugar === "details"){
-              // console.log('dentro del if de details alberto');
+              console.log('console1');
               $("#" + id_car + ".details_heart").toggleClass('is-active');
             }else{
+              console.log('console2');
               $("#" + id_car + ".list_heart").toggleClass('is-active');
             }
-            
           }).catch(function() {
-              // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function click_like SHOP";
-              console.log('DONA ERROR');
+            console.log('DONA ERROR');
           });
   } else {
       localStorage.setItem('id_car', id_car);
@@ -683,28 +668,41 @@ function click_like(id_car, lugar) {
 }
 
 function load_likes_user() {
-  // console.log("hola");
   var token = localStorage.getItem('token');
-  // var id_car = localStorage.getItem('id_car');
-  // console.log(token);
-  // console.log(id_car);
   if (token) {
-    // console.log("dentro de load likes if");
       ajaxPromise("module/shop/ctrl/ctrl_shop.php?op=load_likes_user", 'POST', 'JSON', { 'token': token }) 
           .then(function(data) {
             console.log(data);
               for (row in data) {
                 //YOLANDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                 //MIRA ESTA MILLORA
-                $("#" + data[row].car_plate + ".details_heart").toggleClass('is-active');  
+                $("#" + data[row].car_plate + ".details_heart").toggleClass('is-active'); 
                 $("#" + data[row].car_plate + ".list_heart").toggleClass('is-active');
 
               }
           }).catch(function() {
-              // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Function load_like_user SHOP";
-              console.log('que putadaaaaaaLOAD');
+            console.log('que putadaaaaaaLOAD');
           });
   }
+}
+
+function add_cart(car_plate){
+  // console.log('add_cart log');
+  var token = localStorage.getItem('token');
+  if(token){
+      ajaxPromise('module/cart/ctrl/ctrl_cart.php?op=insert_cart', 'POST', 'JSON', { 'id_car': car_plate, 'token' : token })
+      .then(function(data) { 
+        console.log(data);
+          //toastr
+      }).catch(function() {
+        console.log('CATCH');
+          window.location.href = 'index.php?page=error503'
+      });   
+    }else{
+      // localStorage.setItem('id_car', id_car);
+      toastr.warning("Debes de iniciar session");
+      setTimeout("location.href = 'index.php?page=ctrl_login&op=list';", 2000);
+    }
 }
 
 

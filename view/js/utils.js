@@ -42,7 +42,7 @@ function load_menu() {
                     .html(
                         '<a>' + data.username + '<a/>'
                     )
-
+                    $('<a id="button_cart" href="index.php?page=ctrl_cart&op=view"><i class="fa-solid fa-cart-shopping fa-2xl"></i></a>').appendTo('.cart-shop');
             }).catch(function() {
                 console.log("Error al cargar los datos del user");
             });

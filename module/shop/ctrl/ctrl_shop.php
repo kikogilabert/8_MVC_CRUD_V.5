@@ -203,9 +203,6 @@
                 case 'control_likes':
                     $token = $_POST['token'];
                     $id_car = $_POST['id_car'];
-                    // echo json_encode($id_car);
-                    // exit;
-            
                     try {
                         $json = decode_token($token);
                         $dao = new DAO_Shop();
@@ -222,9 +219,13 @@
                         foreach ($rdo as $row) {
                             array_push($dinfo, $row);
                         }
+                        // echo json_encode(count($dinfo));
+                        // exit;
                         if (count($dinfo) === 0) {
                             $dao = new DAO_Shop();
                             $rdo = $dao->like($id_car, $json['username']);
+                            // echo json_encode($rdo);
+                            // exit;
                             echo json_encode("like");
                         } else {
                             $dao = new DAO_Shop();
