@@ -20,17 +20,13 @@
 	session_start();
 ?>
 <div id="wrapper">		
-    <div id="header">    	
-    	<?php
-    	    // include("view/inc/header.php");
-    	?>        
-    </div>  
+
     <div id="menu">
 		<?php
 		    include("view/inc/menu.php");
 		?>
     </div>	
-    <div id="">
+    <div id="pages">
     	<?php 
 		    include("view/inc/pages.php"); 
 		?>        

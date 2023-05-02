@@ -107,7 +107,7 @@ function ajaxForSearch(url, filters, total_prod, items_page) {
               "<li>" + "COLOR:   "  + data[row].color + "</li>" +
               "<li>" + "PRICE:   "  + data[row].price + '€' + "</li>" +
               "<li class='botones'>" +"<div>" +
-              "<a class='button-85' id='" + data[row].car_plate +"' href='#'>Add to Cart</a>" + "&nbsp; &nbsp;" +
+              "<a class='button-85' id='" + data[row].car_plate +"'> Add to Cart</a>" + "&nbsp; &nbsp;" +
               "<button id='" + data[row].car_plate + "' class='more_info_list' >More Info</button>" +
               // "<button class='button buy' >Buy</button>" +
               "</div>" +
@@ -144,22 +144,19 @@ function clicks() {
   });
 
 
-  $(document).on("click",".list_heart", function(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+  $(document).on("click",".list_heart", function() {
     var car_plate = this.getAttribute('id');
     click_like(car_plate, "list_all");
     // console.log(car_plate);
   });
 
-  $(document).one( "click",".details_heart", function(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+  $(document).one( "click",".details_heart", function() {
       var car_plate = this.getAttribute('id');
       loadDetails(car_plate);
-      console.log(car_plate);
-    $(this).off('click'); 
+      // console.log(car_plate);
+    // $(this).off('click'); 
 });
+
 $(document).on("click", ".button-85", function () {
   var car_plate = this.getAttribute('id');
  add_cart(car_plate);
@@ -632,7 +629,7 @@ function pagination(filter) {
                 )
     
             } 
-        loadCars(0, 3);
+        // loadCars(0, 3);
           });
       
 }

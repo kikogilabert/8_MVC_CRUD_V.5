@@ -1,5 +1,3 @@
-<div id="menu">
-
 	<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"

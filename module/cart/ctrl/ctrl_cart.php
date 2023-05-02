@@ -68,34 +68,33 @@ if(isset($_GET['op'])){
             try{
                 $json = decode_token($token);
                 $dao = new DAO_Cart();
-                    $rdo = $dao->select_user_cart($json['username']);
-                }catch (Exception $e){
-                    echo json_encode("error");
-                    exit;
+                $rdo = $dao->select_user_cart($json['username']);
+                // echo json_encode($rdo);
+                // exit;
+            }catch (Exception $e){
+                echo json_encode("error");
+                exit;
+            }
+            if(!$rdo){
+                echo json_encode("error");
+                exit;
+            }else{
+                $dinfo = array();
+                foreach ($rdo as $row) {
+                    array_push($dinfo, $row);
                 }
-                if(!$rdo){
-                    echo json_encode("error");
-                    exit;
-                }else{
-                    $dinfo = array();
-                    foreach ($rdo as $row) {
-                        array_push($dinfo, $row);
-                    }
-                    echo json_encode($dinfo);
-                }
-                break; 
+                echo json_encode($dinfo);
+            }
+            break; 
 
             case 'update_qty';    
+            $token = $_POST['token'];
+            $id_car = $_POST['id_car'];
+            $qty = $_POST['qty'];
                 try{
-                    $token = $_GET['user'];
-                    $secret = 'maytheforcebewithyou';
-    
-                    $JWT = new JWT;
-                    $json = $JWT->decode($token, $secret);  
-                    $json = json_decode($json, TRUE);
-                    
+                    $json = decode_token($token);
                     $dao = new DAO_Cart();
-                    $rdo = $dao->update_qty($json['name'], $_GET['id'],$_GET['qty']);
+                    $rdo = $dao->update_qty($json['username'], $id_car, $qty);
                 }catch (Exception $e){
                     echo json_encode("error");
                     exit;
@@ -110,16 +109,15 @@ if(isset($_GET['op'])){
                 break; 
 
             case 'checkout';    
+                $token = $_POST['token'];
+                // echo json_encode($token);
+                // exit;
                 try{
-                    $token = $_GET['user'];
-                    $secret = 'maytheforcebewithyou';
-    
-                    $JWT = new JWT;
-                    $json = $JWT->decode($token, $secret);  
-                    $json = json_decode($json, TRUE);
-                    
+                    $json = decode_token($token);
                     $dao = new DAO_Cart();
-                    $rdo = $dao->select_user_cart($json['name']);
+                    $rdo = $dao->select_user_cart($json['username']);
+                    // echo json_encode($rdo);
+                    // exit;
                 }catch (Exception $e){
                     echo json_encode("error");
                     exit;
@@ -129,12 +127,11 @@ if(isset($_GET['op'])){
                     exit;
                 }else{
                     $dao = new DAO_Cart();
-                    $res = $dao->checkout($rdo, $json['name']);
-                    echo json_encode("checkout");
+                    $res = $dao->checkout($rdo, $json['username']);
+                    echo json_encode('checkout correcto');
                     exit;
                 }
                 break; 
-                    
             default;
                 include("view/inc/error404.php");
                 break;

@@ -54,6 +54,8 @@ class DAO_cart{
         AND c.id_user= (SELECT o.id_user 
                         FROM users o
                         WHERE o.username = '$user');";
+                // echo json_encode($sql);
+                // exit;
         // SELECT c.car_plate, cc.model, cc.price, cc.img_car cc.km, c.qty FROM cart c, car cc WHERE c.car_plate = cc.car_plate AND user='KikoAdmin';
         $conexion = connect::con();
         $res = mysqli_query($conexion, $sql);
@@ -62,8 +64,10 @@ class DAO_cart{
     }
 
     function update_qty($user, $id, $qty){
-        $sql = "UPDATE cart SET qty = $qty WHERE user='$user' AND codigo_producto='$id'";
+        $sql = "UPDATE cart SET qty = '$qty' WHERE car_plate ='$id' AND id_user = (SELECT u.id_user FROM users u WHERE u.username = '$user');";
         $conexion = connect::con();
+        //  echo json_encode($sql);
+        // exit;
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
         return $res;
@@ -85,24 +89,25 @@ class DAO_cart{
     // 
 
     function checkout($data, $user){
-        $name = md5($user);
-        $date = date("Ymd");
-        foreach($data as $fila){
-            $cod_ped = $user;
-            $cod_prod = $fila["codigo_producto"];
-            $talla = $fila["talla"];
-            $cantidad = $fila["qty"];
-            $precio = $fila["precio"];
-            $total_precio = $fila["precio"]*$fila["qty"];
+        $sql = "";
+        $date = date('y-m-d h:i:s');
+        $conexion = connect::con();
 
-            $sql = "INSERT INTO `pedidos`(`cod_ped`, `user`, `cod_prod`, `talla`, `cantidad`, `precio`, `total_precio`, `fecha`) 
-                    VALUES ('$cod_ped','$user','$cod_prod','$talla','$cantidad','$precio','$total_precio','$date')";
-            $conexion = connect::con();
+        foreach($data as $row){
+            // $cod_ped = $user;
+            $car_plate = $row["car_plate"];
+            $qty = $row["qty"];
+            $price = $row["price"];
+            $total_price = $row["price"]*$row["qty"];
+
+            $sql = "INSERT INTO `orders`(`cod_user`, `car_plate`, `qty`, `price`, `total_price`, `order_date`) 
+                    VALUES ((SELECT o.id_user FROM users o WHERE o.username = '$user'),'$car_plate','$qty','$price','$total_price','$date');";
             $res = mysqli_query($conexion, $sql);
-            connect::close($conexion); 
-        }
+}
+        connect::close($conexion);
+        // echo json_encode($sql);
+        // exit;
         return $res;
     }
 }
-
 ?>
