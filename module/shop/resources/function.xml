@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>view</name>
+        <uri>view</uri>
+    </function>
+    <function>
+        <name>allcars</name>
+        <uri>allcars</uri>
+    </function>
+     <function>
+        <name>details_car</name>
+        <uri>details_car</uri>
+    </function>
+       <function>
+        <name>filters</name>
+        <uri>filters</uri>
+    </function>
+       <function>
+        <name>count_filters</name>
+        <uri>count_filters</uri>
+    </function>
+    <function>
+        <name>count_filters_search</name>
+        <uri>count_filters_search</uri>
+    </function>
+    <function>
+        <name>count_filters_home</name>
+        <uri>count_filters_home</uri>
+    </function>
+    <function>
+        <name>count_filters_shop</name>
+        <uri>count_filters_shop</uri>
+    </function>
+      <function>
+        <name>visitor_counter</name>
+        <uri>visitor_counter</uri>
+    </function>
+       <function>
+        <name>cars_related</name>
+        <uri>cars_related</uri>
+    </function>
+      <function>
+        <name>count_cars_related</name>
+        <uri>count_cars_related</uri>
+    </function>
+    <!-- <function>
+        <name>category</name>
+        <uri>category</uri>
+    </function>
+    <function>
+        <name>type</name>
+        <uri>type</uri>
+    </function>
+    <function>
+        <name>most_visited</name>
+        <uri>most_visited</uri>
+    </function> -->
+</functions>

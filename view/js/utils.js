@@ -12,8 +12,26 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
         }); 
     });
 }
-//================LOAD-HEADER================
+//================LOAD-MENU================
 function load_menu() {
+    $('<div></div>').appendTo('.new-menu')
+    .html(
+      '<div class="navbar-collapse collapse justify-content-center" id="navbarDefault">'+
+      '<ul class="navbar-nav">'+
+        '<div class="nav_list"></div>'+
+       '<li class="nav-item">'+
+          '<a class="nav-link" href="' + friendlyURL("?module=home") + '">Home</a>'+
+        '</li>'+
+        '<li class="nav-item">'+
+          '<a class="nav-link" href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>'+
+        '</li>'+
+        '<li class="nav-item">'+
+        '<a class="nav-link" href="' + friendlyURL("?module=contact") + '" class="nav_link">Contact</a>'+
+        '</li>'+
+        '</ul>'+
+        '</div>'
+        )
+
     var token = localStorage.getItem('token');
     if (token) {
         ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'token': token })
@@ -60,7 +78,7 @@ function load_menu() {
 }
 
 
-// //================CLICK-LOGIUT================
+// //================CLICK-LOGOUT================
 function click_logout() {
     $(document).on('click', '#logout', function() {
         // localStorage.removeItem('total_prod');
@@ -92,6 +110,25 @@ function logout() {
 
 //     });
 // }
+
+function friendlyURL(url) {
+    var link = "";
+    url = url.replace("?", "");
+    url = url.split("&");
+    cont = 0;
+    for (var i = 0; i < url.length; i++) {
+    	cont++;
+        var aux = url[i].split("=");
+        if (cont == 2) {
+        	link += "/" + aux[1] + "/";	
+        }else{
+        	link += "/" + aux[1];
+        }
+    }
+    // console.log(link);
+    return "http://localhost/8_MVC_CRUD_V.5" + link;
+}
+
 
 
 $(document).ready(function() {

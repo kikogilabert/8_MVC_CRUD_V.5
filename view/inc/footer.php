@@ -6,7 +6,7 @@
 			<div class="col-sm-12 col-md-4">
 			<div class="widget-a">
 				<div class="w-header-a">
-				<h3 class="w-title-a text-brand">EstateAgency</h3>
+				<h3 class="w-title-a text-brand">EGOCARS</h3>
 				</div>
 				<div class="w-body-a">
 				<p class="w-text-a color-text-a">

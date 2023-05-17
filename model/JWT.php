@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Copyright(c)2011 Miguel Angel Nubla Ruiz (miguelangel.nubla@gmail.com). All rights reserved
- */
-
 class JWT {
     private $alg;
     private $hash;
