@@ -49,6 +49,7 @@
                 foreach ($modules as $row) {
                     if (in_array($this -> uriModule, (Array) $row -> uri)) {
                         $path = 'module/' . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
+                        // return $path;
                         if (file_exists($path)) {
                             require_once($path);
                             $controllerName = 'controller_' . (String) $row -> name;

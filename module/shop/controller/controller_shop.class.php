@@ -47,14 +47,14 @@
             // echo json_encode('Hola count_filters_search');
             echo json_encode(common::load_model('shop_model', 'get_count_filters_search', $_POST['filter_search']));
         }
-        // function control_likes() {
-        //     // echo json_encode('Hola control_likes');
-        //     echo json_encode(common::load_model('shop_model', 'get_control_likes'));
-        // }
-        // function load_likes_user() {
-        //     // echo json_encode('Hola load_likes_user');
-        //     echo json_encode(common::load_model('shop_model', 'get_load_likes_user'));
-        // }
+        function control_likes() {
+            // echo json_encode('Hola control_likes');
+            echo json_encode(common::load_model('shop_model', 'get_control_likes', [$_POST['id_car'], $_POST['token']]));
+        }
+        function load_likes_user() {
+            // echo json_encode('Hola load_likes_user');
+            echo json_encode(common::load_model('shop_model', 'get_load_likes_user',  $_POST['token']));
+        }
 
     }
 ?>

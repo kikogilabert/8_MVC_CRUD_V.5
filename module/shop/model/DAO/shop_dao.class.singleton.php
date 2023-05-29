@@ -152,35 +152,35 @@
 
       
 // // LIKES
-// function select_load_likes($db, $username){
-// 	$sql = "SELECT l.car_plate FROM likes l WHERE l.id_user = (SELECT u.id_user FROM users u WHERE u.username = '$username');";
-//     $stmt = $db -> ejecutar($sql);
-//     return $db -> listar($stmt);
-// }
+function select_load_likes($db, $username){
+	$sql = "SELECT l.car_plate FROM likes l WHERE l.id_user = (SELECT u.id_user FROM users u WHERE u.username = '$username');";
+    $stmt = $db -> ejecutar($sql);
+    return $db -> listar($stmt);
+}
 
-// function select_likes($db, $id_car, $username){
-// 	$sql = "SELECT i.car_plate FROM likes i
-// 		WHERE i.id_user = (SELECT u.id_user FROM users u WHERE u.username LIKE '$username')
-// 		AND i.car_plate = '$id_car';";
+function select_likes($db, $id_car, $username){
+	$sql = "SELECT i.car_plate FROM likes i
+		WHERE i.id_user = (SELECT u.id_user FROM users u WHERE u.username LIKE '$username')
+		AND i.car_plate = '$id_car';";
 
-// 	 $stmt = $db -> ejecutar($sql);
-//      return $db -> listar($stmt);
-// }
+    // return $sql;
+	$stmt = $db -> ejecutar($sql);
+    return $db -> listar($stmt);
+}
 
-// function like($db, $id_car, $username){
-// 	$sql = "INSERT INTO likes (id_user, car_plate) VALUES ((SELECT  u.id_user FROM users u WHERE u.username= '$username') ,'$id_car');";
-// 	$conexion = connect::con();
-// 	// echo json_encode($sql);
-// 	// exit;
-//     $stmt = $db -> ejecutar($sql);
-//     return $db -> listar($stmt);
-// }
+function like($db, $id_car, $username){
+	$sql = "INSERT INTO likes (id_user, car_plate) 
+        VALUES ((SELECT  u.id_user FROM users u WHERE u.username= '$username') ,'$id_car');";
 
-// function dislike($db, $id_car, $username){
-// 	$sql = "DELETE FROM likes WHERE car_plate='$id_car' AND id_user=(SELECT u.id_user FROM users u WHERE u.username= '$username');";
-   
-//     $stmt = $db -> ejecutar($sql);
-//     return $db -> listar($stmt);
-//     }
+    $stmt = $db -> ejecutar($sql);
+
+}
+
+function dislike($db, $id_car, $username){
+	$sql = "DELETE FROM likes WHERE car_plate='$id_car' 
+    AND id_user=(SELECT u.id_user FROM users u WHERE u.username= '$username');";
+        // return $sql;
+   $stmt = $db -> ejecutar($sql);
+    }
 }
 ?>

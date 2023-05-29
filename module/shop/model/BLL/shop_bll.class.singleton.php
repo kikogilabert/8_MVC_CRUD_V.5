@@ -79,16 +79,32 @@
 			return $this -> dao -> select_data_cars_related($this -> db, $args[0], $args[1], $args[2]);
 		}
 
+		public function get_load_likes_user_BLL($token) {
+			// return 'hola load';
+			$check = middleware::decode_token($token);
+			// return $check['username'];
+			return $this -> dao -> select_load_likes($this -> db, $check['username']);
+		}
 
-
-	// 	public function get_control_likes_BLL() {
-	// 		// return 'type bblblblblblblbl';
-	// 		return $this -> dao -> select_data_control_likes($this -> db);
-	// 	}
-
-	// 	public function get_load_likes_user_BLL() {
-	// 		// return 'type bblblblblblblbl';
-	// 		return $this -> dao -> select_data_load_likes_user($this -> db);
-	// 	}
+	
+	public function get_control_likes_BLL($args) {
+		$token=$args[1];
+		// return $token;
+		$id=$args[0];
+		if ($token){
+			$check = middleware::decode_token($token);
+				// return $check['username'];
+				if (empty( $this -> dao ->select_likes($this->db, $id, $check['username']))) {
+						// return 'holaaa if';
+						$this -> dao -> like($this -> db, $id, $check['username']);
+						return 'like';
+				}else{   
+					// return 'hola else';        
+						$this -> dao -> dislike($this -> db, $id, $check['username']);     
+						return 'dislike';
+					}
+			}
+			
+		}  
 	}
 ?>

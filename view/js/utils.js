@@ -20,24 +20,43 @@ function load_menu() {
       '<ul class="navbar-nav">'+
         '<div class="nav_list"></div>'+
        '<li class="nav-item">'+
-          '<a class="nav-link" href="' + friendlyURL("?module=home") + '">Home</a>'+
+            '<a class="nav-link" href="' + friendlyURL("?module=home") + '">Home</a>'+
         '</li>'+
         '<li class="nav-item">'+
-          '<a class="nav-link" href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>'+
+            '<a class="nav-link" href="' + friendlyURL("?module=shop") + '" class="nav_link">Shop</a>'+
         '</li>'+
         '<li class="nav-item">'+
-        '<a class="nav-link" href="' + friendlyURL("?module=contact") + '" class="nav_link">Contact</a>'+
+            '<a class="nav-link" href="' + friendlyURL("?module=contact") + '" class="nav_link">Contact</a>'+
         '</li>'+
-        '</ul>'+
-        '</div>'
+        '<li class="nav-item login-item">'+
+            '<a class="nav-link" href="' + friendlyURL("?module=login") + '" class="nav_link">Login</a>'+
+        '</li>'+
+        '<li class="nav-item">'+
+            '<div class="logout-button nav-link"> </div>'+  
+        '</li>'+
+        '<li class="nav-item">'+
+        '<div class="log-icon"> </div>'+ 
+        '</li>'+
+    
+        '<li class="nav-item">'+
+        '<div id="des_inf_user"></div>'+
+        '</li>'+
+
+        '<li class="nav-item">'+
+        '<div class="cart-shop"></div>'+
+        '</li>'+
+        '</div>'+
+        '</ul>'
         )
+
 
     var token = localStorage.getItem('token');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'token': token })
+        // console.log('dentro token utils');
+        ajaxPromise('?module=login&op=data_user', 'POST', 'JSON', {token})
             .then(function(data) {
-                // console.log(data);
-                if (data.type_user == "client") {
+                console.log(data);
+                if (data[0].type_user == "client") {
                     console.log("Client loged");
                     $('.opc_CRUD').empty();
                     $('.opc_exceptions').empty();
@@ -55,10 +74,10 @@ function load_menu() {
                     '<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i>LOGOUT</a>'
                 );
 
-                $('<img class="avatar_picture"src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
+                $('<img class="avatar_picture"src="' + data[0].avatar + '"alt="Robot">').appendTo('.log-icon');
                 $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
                     .html(
-                        '<a>' + data.username + '<a/>'
+                        '<a>' + data[0].username + '<a/>'
                     )
                     $('<a id="button_cart" href="index.php?page=ctrl_cart&op=view"><i class="fa-solid fa-cart-shopping fa-2xl"></i></a>').appendTo('.cart-shop');
             }).catch(function() {
@@ -81,35 +100,17 @@ function load_menu() {
 // //================CLICK-LOGOUT================
 function click_logout() {
     $(document).on('click', '#logout', function() {
-        // localStorage.removeItem('total_prod');
-        toastr.success("Logout succesfully");
-        setTimeout('logout(); ', 1000);
-    });
-}
-
-// //================LOG-OUT================
-function logout() {
-
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
+        ajaxPromise('?module=login&op=logout', 'POST', 'JSON')
         .then(function(data) {
-            // console.log(data);
+            console.log(data);
             localStorage.removeItem('token');
-            window.location.href = "index.php?page=ctrl_home&op=list";
+            toastr.success("Logout succesfully");
+            setTimeout( window.location.href = friendlyURL("?module=home"), 2000);
         }).catch(function() {
             console.log('Something has occured');
         });
-
+    });
 }
-
-// // Remove localstorage('page') with click in shop
-// function click_shop() {
-//     $(document).on('click', '#opc_shop', function() {
-//         localStorage.removeItem('page');
-//         localStorage.removeItem('total_prod');
-//         console.log("Se ha borrado la pagina");
-
-//     });
-// }
 
 function friendlyURL(url) {
     var link = "";

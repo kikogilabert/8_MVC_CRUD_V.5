@@ -1,5 +1,4 @@
 <?php
-    // include( DAO_HOME . "home_dao.class.singleton.php");
 
 	class home_bll {
 		private $dao;

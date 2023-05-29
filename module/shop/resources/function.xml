@@ -44,15 +44,15 @@
         <name>count_cars_related</name>
         <uri>count_cars_related</uri>
     </function>
+    <function>
+        <name>control_likes</name>
+        <uri>control_likes</uri>
+    </function>
+    <function>
+        <name>load_likes_user</name>
+        <uri>load_likes_user</uri>
+    </function>
     <!-- <function>
-        <name>category</name>
-        <uri>category</uri>
-    </function>
-    <function>
-        <name>type</name>
-        <uri>type</uri>
-    </function>
-    <function>
         <name>most_visited</name>
         <uri>most_visited</uri>
     </function> -->

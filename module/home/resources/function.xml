@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>search_brand</name>
-        <uri>search_brand</uri>
+        <name>view</name>
+        <uri>view</uri>
+    </function>
+    <function>
+        <name>carrusel</name>
+        <uri>carrusel</uri>
     </function>
      <function>
-        <name>search_category_null</name>
-        <uri>search_category_null</uri>
+        <name>category</name>
+        <uri>category</uri>
     </function>
      <function>
-        <name>search_category</name>
-        <uri>search_category</uri>
+        <name>type</name>
+        <uri>type</uri>
+    </function>
+     <function>
+        <name>most_visited</name>
+        <uri>most_visited</uri>
     </function>
 </functions>

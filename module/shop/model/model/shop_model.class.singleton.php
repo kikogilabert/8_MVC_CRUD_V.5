@@ -56,12 +56,13 @@
         public function get_count_filters_search($args) {
             return $this -> bll -> get_count_filters_search_BLL($args);
         }
-        // public function get_control_likes() {
-        //     return $this -> bll -> get_control_likes_BLL();
-        // }
-        // public function get_load_likes_user() {
-        //     return $this -> bll -> get_load_likes_user_BLL();
-        // }
+        public function get_control_likes($args) {    
+            return $this -> bll -> get_control_likes_BLL($args);
+        
+        }
+        public function get_load_likes_user($token) {
+            return $this -> bll -> get_load_likes_user_BLL($token);
+        }
 
     }
 ?>

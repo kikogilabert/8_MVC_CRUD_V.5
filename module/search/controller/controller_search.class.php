@@ -1,24 +1,24 @@
 <?php
     class controller_search {
+        function brand() {
+            // echo json_encode('Hola brand');
+                echo json_encode(common::load_model('search_model', 'get_search_brand'));
+        }
 
-    //     function carrusel() {
-    //         // echo json_encode('dentro de carrusel');
-    //             echo json_encode(common::load_model('home_model', 'get_carrusel'));
-    //     }
-
-    //     function category() {
-            
-    //         // echo json_encode('Hola CATEGORY');
-    //         echo json_encode(common::load_model('home_model', 'get_category'));
-    //     }
+        function category_null() {
+            // echo json_encode('Hola CATEGORY');
+            echo json_encode(common::load_model('search_model','get_search_category_null'));
+        }
         
-    //     function type() {
-    //         // echo json_encode('Hola type');
-    //         echo json_encode(common::load_model('home_model', 'get_type'));
-    //     }
-    //     function most_visited() {
-    //         // echo json_encode('Hola type');
-    //         echo json_encode(common::load_model('home_model', 'most_visited'));
-    //     }
+        function category() {
+            // echo json_encode('Hola CATEGORY');
+            // echo json_encode('Hola type');
+            echo json_encode(common::load_model('search_model', 'get_search_category'));
+        }
+        function autocomplete() {
+            // echo json_encode($_POST['sdata']); 
+            // echo json_encode('Hola type');
+            echo json_encode(common::load_model('search_model', 'get_search_autocomplete', $_POST['sdata']));
+        }
     }
 ?>

@@ -1,9 +1,7 @@
 <?php
     class mail {
-        public static function send_email($email) {
-            // echo json_encode('pepito');
-            // exit;
-            switch ($email['type']) {
+        public static function send_email($email1) {
+            switch ($email1['type']) {
                 case 'contact';
                 // echo json_encode('pepitooooo');
                 // exit;
@@ -13,12 +11,17 @@
                     $email['inputMatter'] = ' lo que pasaaaa';
                     $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/index.php?module=contact&op=view'>Click here for verify your email.</a>";
                         break;
-                // case 'validate';
-                //     $email['fromEmail'] = 'secondchanceonti@gmail.com';
-                //     $email['inputEmail'] = 'secondchanceonti@gmail.com';
-                //     $email['inputMatter'] = 'Email verification';
-                //     $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/verify/$email[token]'>Click here for verify your email.</a>";
-                //     break;
+                case 'validate':
+
+                 
+                    $email['toEmail'] = $email1['toEmail'];
+                    
+                    $email['fromEmail'] = 'kiko.gilabertm@gmail.com';
+                    
+                    $email['inputEmail'] = 'kiko.gilabertm@gmail.com';
+                    $email['inputMatter'] = 'Email verification';
+                    $email['inputMessage'] = "<h2>Verificacion</h2><a href='http://localhost/8_MVC_CRUD_V.5/login/view/verify/$email1[token]'>Click here for verify your email.</a>";
+                        break;
                 // case 'recover';
                 //     $email['fromEmail'] = 'secondchanceonti@gmail.com';
                 //     $email['inputEmail'] = 'secondchanceonti@gmail.com';
@@ -26,11 +29,14 @@
                 //     $email['inputMessage'] = "<a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/recover/$email[token]'>Click here for recover your password.</a>";
                 //     break;
             }
+            // return $email;
             return self::send_mailgun($email);
         }
 
         public static function send_mailgun($values){
+
             $mailgun = parse_ini_file(MODEL_PATH . "php.ini");
+            
             $api_key = $mailgun['api_key'];
             $api_url = $mailgun['api_url'];
 

@@ -116,7 +116,7 @@ function visitor_counter(car_plate){
   ajaxPromise('index.php?module=shop&op=visitor_counter', 'POST', 'JSON', {'id_car' : car_plate})
   .then(function (data) {
   }).catch(function () {
-      // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=Load_Details SHOP";
+      
     });
 }
 
@@ -220,15 +220,16 @@ function load_more_Books_car() {
                       );
               }
           }).catch(function() {
-              // window.location.href = "index.php?module=ctrl_exceptions&op=503&type=503&lugar=News cars HOME";
+            
           });
   })
 }
+
 function get_Books_car() {
   limit = 9;
   ajaxPromise('https://www.googleapis.com/books/v1/volumes?q=Cars','GET', 'JSON')
       .then(function(data) {
-        console.log('getbooks', data.items.length);
+        // console.log('getbooks', data.items.length);
           data.items.length = limit;
           $('<h2 class="cat">Books releted</h2>').appendTo('.books_content');
           $('<button class="load_more_button" id="load_more_books">LOAD MORE</button>').appendTo('.btn-more-books');
@@ -263,9 +264,9 @@ function get_Books_car() {
 
 
 $(document).ready(function() {
-  types();
-  carrusel();
-  category();
+types();
+carrusel();
+category();
 carousel_most_visited();
 clicks();
 get_Books_car();

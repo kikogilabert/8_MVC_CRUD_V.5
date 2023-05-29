@@ -47,7 +47,7 @@
     //MODEL_SEARCH
     define('CTRL_SEARCH', SITE_ROOT . 'module/search/ctrl/');
     // define('BLL_SEARCH', SITE_ROOT . 'module/search/model/BLL/');
-    define('MODEL_SEARCH', SITE_ROOT . 'module/search/model/js/');
+    define('MODEL_SEARCH', SITE_ROOT . 'module/search/model/model/');
     // define('MODEL_SEARCH?¿', SITE_ROOT . 'module/search/model/');
     // define('JS_VIEW_SEARCH', SITE_PATH . 'module/search/view/');
     define ('VIEW_PATH_SEARCH', SITE_ROOT . 'module/search/view/');
@@ -89,13 +89,13 @@
     // define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
     
     //MODEL_LOGIN
-    // define('UTILS_LOGIN', SITE_ROOT . 'module/login/utils/');
-    define('DAO_LOGIN', SITE_ROOT . 'module/login/model/');
-    // define('BLL_LOGIN', SITE_ROOT . 'module/login/model/BLL/');
-    define('MODEL_LOGIN', SITE_PATH . 'module/login/model/');
-    define('CTRL_LOGIN', SITE_ROOT . 'module/login/ctrl/');
-    define('CSS_VIEW_LOGIN', SITE_PATH . 'module/login/view/css/');
+    define('BLL_LOGIN', SITE_ROOT . 'module/login/model/BLL/');
+    define('DAO_LOGIN', SITE_ROOT . 'module/login/model/DAO/');
+    define('CTRL_LOGIN', SITE_ROOT . 'module/login/controller/');
+    define('MODEL_LOGIN', SITE_ROOT . 'module/login/model/model/');
     define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
+    define('JS_VIEW_LOGIN', SITE_PATH . 'module/login/view/js/');
+    // define('VIEW_GLIDER_LOGIN', SITE_PATH . 'view/glider/');
 
     // Friendly
     define('URL_FRIENDLY', TRUE);

@@ -12,18 +12,14 @@
         <name>search</name>
         <uri>search</uri>
     </module>
-    <!-- <module>
-        <name>crud</name>
-        <uri>crud</uri>
-    </module> -->
     <module>
         <name>contact</name>
         <uri>contact</uri>
     </module>
-    <module>
+    <!-- <module>
         <name>errors</name>
         <uri>errors</uri>
-    </module>
+    </module> -->
     <!-- <module>
         <name>cart</name>
         <uri>cart</uri>

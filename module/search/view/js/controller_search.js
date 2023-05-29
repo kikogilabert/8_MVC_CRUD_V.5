@@ -1,7 +1,7 @@
 console.log('BUENASSS');
 function load_brands() {
     // console.log('hola brandddd');
-    ajaxPromise(friendlyURL("?module=search&op=search_brand"), 'POST', 'JSON')
+    ajaxPromise(friendlyURL("?module=search&op=brand"), 'POST', 'JSON')
         .then(function(data) {
             // console.log(data);
             $('<option>Choose a brand</option>').attr('selected', true).attr('disabled', true).appendTo('.search_brand')
@@ -9,17 +9,17 @@ function load_brands() {
                 $('<option value="' + data[row].cod_brand + '">' + data[row].cod_brand + '</option>').appendTo('.search_brand')
             }
         }).catch(function () {
-            window.location.href = "index.php?modules=exception&op=503&error=fail_load_brands&type=503";
+            console.log('catch load brands');
         });
 }
 function load_category(brand) {
-    // console.log('hola categoryyyyyyyyyy');
     $('.search_category').empty();
     // console.log(brand);
     if (brand == undefined) {
-        ajaxPromise(friendlyURL("?module=search&op=search_category_null"), 'POST', 'JSON')
+        ajaxPromise(friendlyURL("?module=search&op=category_null"), 'POST', 'JSON')
             .then(function (data) {
                 // console.log(data);
+                // console.log('esto es una cosa bakana');
                 $('<option>Choose a category</option>').attr('selected', true).attr('disabled', true).appendTo('.search_category')
                 for (row in data) {
                     $('<option value="' + data[row].cod_cat + '">' + data[row].name_cat + '</option>').appendTo('.search_category')
@@ -29,8 +29,9 @@ function load_category(brand) {
             });
     }
     else {
-        console.log(brand);
-        ajaxPromise(friendlyURL("?module=search&op=search_category"), 'POST', 'JSON', {brand})
+        console.log('esto es el else');
+        // console.log(brand);
+        ajaxPromise(friendlyURL("?module=search&op=category"), 'POST', 'JSON', {brand})
             .then(function (data) {
                 console.log(data);
                 $('<option>Choose a categoryS</option>').attr('selected', true).attr('disabled', true).appendTo('.search_category')
@@ -38,7 +39,8 @@ function load_category(brand) {
                     $('<option value="' + data[row].cod_cat + '">' + data[row].name_cat + '</option>').appendTo('.search_category')
                 }
             }).catch(function () {
-                window.location.href = "index.php?page=ctrl_home&op=list";
+                    console.log('catch category not null');
+                // window.location.href = "index.php?page=ctrl_home&op=list";
             });
     }
 }
@@ -50,7 +52,7 @@ function launch_search() {
     $('.search_brand').change(function () {
         console.log(this.value);
         let brand = this.value;
-       // console.log(brand);
+        console.log(brand);
         if (brand === 0) {
             load_category();
         } else {
@@ -60,25 +62,22 @@ function launch_search() {
 }
 
 function autocomplete() {
-    // $('#searchAuto').empty();
-    // console.log('autoclick');
     $("#autocom").on("keyup", function () {
         $('#searchAuto').empty();
-        console.log('autoclick222');
         let sdata = { city: $(this).val() };
         console.log(sdata);
         if (($('.search_brand').val() != 0)) {
             sdata.brand = $('.search_brand').val();
-            console.log('brand',sdata.brand);
             if (($('.search_brand').val() != 0) && ($('.search_category').val() != 0)) {
                 sdata.category = $('.search_category').val();
-                console.log('categoria', sdata.category);
             }
         }
         if (($('.search_brand').val() == undefined) && ($('.search_category').val() != 0)) {
             sdata.category = $('.search_category').val();
         }
-        ajaxPromise('module/search/ctrl/ctrl_search.php?op=autocomplete', 'POST', 'JSON', sdata)
+
+
+        ajaxPromise(friendlyURL("?module=search&op=autocomplete"), 'POST', 'JSON', {sdata})
             .then(function (data) {
                 console.log(data);
                 $('#searchAuto').empty();
@@ -129,12 +128,12 @@ function button_search() {
             console.log(search);
             localStorage.setItem('filters_search', JSON.stringify(search));
         }
-        window.location.href = 'index.php?page=ctrl_shop&op=list_shop';
+        window.location.href = "?module=shop&op=view";
     });
 }
 
 $(document).ready(function () {
     launch_search();
-    // autocomplete();
-    // button_search();
+    autocomplete();
+    button_search();
 });

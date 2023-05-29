@@ -1,10 +1,16 @@
-// console.log('en el ready');
+console.log('en el ready');
 function register() {
     if (validate_register() != 0) {
         var data = $('#register__form').serialize();
-        console.log(data);
+        var username = document.getElementById('username_reg').value;
+        // console.log(username);
+        var password = document.getElementById('passwd1_reg').value;
+        // console.log(password);
+        var email = document.getElementById('email_reg').value;
+        // console.log(email);
+        // console.log(data);
 
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=register', 'POST', 'JSON', data)
+        ajaxPromise('?module=login&op=register', 'POST', 'JSON', {username, password, email})
             .then(function(result) {
                 console.log(result);
                 if (result == "error_email") {
@@ -13,8 +19,9 @@ function register() {
                     document.getElementById('error_username_reg').innerHTML = "This user's already being used, try with another one!"
                 } else {
                     console.log("se ha registrado correctamente");
-                    toastr.success("Registery succesfully");
-                    setTimeout(' window.location.href = "index.php?page=ctrl_login&op=list"; ', 1000);
+                    toastr.success("Register completed");
+                    toastr.warning("Check your mail inbox");
+                    setTimeout(' window.location.href = friendlyURL("?module=login")', 1000);
                 }
             }).catch(function(textStatus) {
                 if (console && console.log) {
@@ -119,8 +126,10 @@ function validate_register() {
     }
 }
 
+
+
 $(document).ready(function() {
-    
+    // load_content();
     key_register();
     button_register();
 });
