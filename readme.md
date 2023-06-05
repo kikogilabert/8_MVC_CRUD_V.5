@@ -67,7 +67,7 @@
                 <li>Furthermore some relevant info, each car has 3 different buttons where you can:
                   <ul>
                     <li> Add to favorite: Save the car into your favorite section for future moments </li>
-                    <li>More info: Get a detailed view and specific information of the car you clicked.</li>
+                    <li>More info: Get a detailed view and specific information and location(mapbox api) of the car you clicked.</li>
                     <li>Add to cart: Add the car into your basket/cart so you can checkout your order from there</li>
                     </ul>
                 </li>
