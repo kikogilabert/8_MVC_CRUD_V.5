@@ -90,7 +90,12 @@
             </tr>
             <tr>
                 <td style="color: orange;"><b>CONTACT:</b></td> 
-                <td>In this module you can find a small form with which you can contact us, regardless of whether it is to solve a problem on the page or if you have any questions or problems with a specific product.</td>
+                <td>In this module you can find a small form with which you can contact us, regardless of whether it is to solve a problem on the page or if you have any questions or problems with a specific product </td>
+          </tr>
+              <tr>
+                <td style="color: orange;"><b>SHPPING CART:</b></td> 
+                Once loged in a CART-ICON will appear in the menu.  
+                  <td> In the shopping cart you will be able to see all the cars you added in the past while loged in your account. You will be able to change quantity of the product, also you're able to remove the entire item of the shopping cart. At the bottom you will see all the price details and the checkout button for commiting your payment and finish your order.</td>
           </tr>
         </table>
     </div>
