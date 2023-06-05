@@ -94,8 +94,7 @@
           </tr>
               <tr>
                 <td style="color: orange;"><b>SHOPPING CART:</b></td> 
-                Once loged in a CART-ICON will appear in the menu.  
-                  <td> In the shopping cart you will be able to see all the cars you added in the past while loged in your account. You will be able to change quantity of the product, also you're able to remove the entire item of the shopping cart. At the bottom you will see all the price details and the checkout button for commiting your payment and finish your order.</td>
+                  <td> Once loged in a CART-ICON will appear in the menu. In the shopping cart you will be able to see all the cars you added in the past while loged in your account. You will be able to change quantity of the product, also you're able to remove the entire item of the shopping cart. At the bottom you will see all the price details and the checkout button for commiting your payment and finish your order.</td>
           </tr>
         </table>
     </div>
