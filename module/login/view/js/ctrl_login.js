@@ -307,15 +307,6 @@ function social_login(param){
 }
 
 function firebase_config(){
-    var config = {
-        apiKey: "AIzaSyDiTxpeBQ7i0N2Ghjyb4_g22j4lUCKLASw",
-        authDomain: "test-firebase-egocars.firebaseapp.com",
-        projectId: "test-firebase-egocars",
-        // storageBucket: "test-firebase-egocars.appspot.com",
-        messagingSenderId: "495514694215",
-        appId: "1:495514694215:web:b183cd7f513ce8b0d6f762",
-        measurementId: "G-JXEGLTGLTC"
-    };
     if(!firebase.apps.length){
         firebase.initializeApp(config);
     }else{
