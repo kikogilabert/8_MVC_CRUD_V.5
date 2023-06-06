@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td style="color: orange;"><b>SEARCH:</b></td>
-                <td>In this module you can find a filter menu where you can search by brand, model and city or all together. You will be redirected to the shop page where the search filters will be already aplied.</td>
+                <td>In this module you can find a filter menu where you can search by brand, model and city or combine them. You will be redirected to the shop page where the search filters will be already aplied.</td>
             </tr>
             <tr>
                 <td style="color: orange;"><b>LOGIN/REGISTER:</b></td> 
