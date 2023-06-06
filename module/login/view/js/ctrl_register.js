@@ -1,4 +1,4 @@
-console.log('en el ready');
+// console.log('en el ready');
 function register() {
     if (validate_register() != 0) {
         var data = $('#register__form').serialize();
@@ -18,7 +18,7 @@ function register() {
                 } else if (result == "error_user") {
                     document.getElementById('error_username_reg').innerHTML = "This user's already being used, try with another one!"
                 } else {
-                    console.log("se ha registrado correctamente");
+                    console.log("Se ha registrado correctamente");
                     toastr.success("Register completed");
                     toastr.warning("Check your mail inbox");
                     setTimeout(' window.location.href = friendlyURL("?module=login")', 1000);

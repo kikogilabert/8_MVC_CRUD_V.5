@@ -1,10 +1,8 @@
 function protecturl() {
 
     var token = localStorage.getItem('token');
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=controluser', 'POST', 'JSON', { 'token': token })
+    ajaxPromise(friendlyURL('?module=login&op=controluser'), 'POST', 'JSON', { 'token': token })
         .then(function(data) {
-            console.log(data);
-
             if (data == "Correct_User") {
                 console.log("CORRECTO-->El usario coincide con la session");
             } else if (data == "Wrong_User") {
@@ -18,7 +16,7 @@ function protecturl() {
 function control_activity() {
     var token = localStorage.getItem('token');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=actividad', 'POST', 'JSON')
+        ajaxPromise(friendlyURL('?module=login&op=actividad'), 'POST', 'JSON')
             .then(function(response) {
                 if (response == "inactivo") {
                     console.log("usuario INACTIVO");
@@ -37,7 +35,7 @@ function control_activity() {
 function refresh_token() {
     var token = localStorage.getItem('token');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_token', 'POST', 'JSON', { 'token': token })
+        ajaxPromise(friendlyURL('?module=login&op=refresh_token'), 'POST', 'JSON', { 'token': token })
             .then(function(data_token) {
                 console.log("Refresh token correctly");
                 localStorage.setItem("token", data_token);
@@ -48,18 +46,24 @@ function refresh_token() {
 }
 
 function refresh_cookie() {
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=refresh_cookie', 'POST', 'JSON')
+    ajaxPromise(friendlyURL('?module=login&op=refresh_cookie'), 'POST', 'JSON')
         .then(function(response) {
             console.log("Refresh cookie correctly");
         });
 }
 
 function logout_auto() {
+        ajaxPromise(friendlyURL('?module=login&op=logout'), 'POST', 'JSON')
+        .then(function(data) {
+            console.log(data);
+            localStorage.removeItem('token');
+            toastr.warning("Se ha cerrado la cuenta por seguridad!!");
+            setTimeout( window.location.href = friendlyURL("?module=home"), 2000);
+        }).catch(function() {
+            console.log('Something has occured');
+        });
+    }
 
-    localStorage.removeItem('token');
-    toastr.warning("Se ha cerrado la cuenta por seguridad!!");
-    setTimeout('window.location.href = "index.php?page=ctrl_login&op=list";', 1000);
-}
 
 $(document).ready(function() {
     // setInterval(function() { control_activity() }, 60000); //10min= 600000

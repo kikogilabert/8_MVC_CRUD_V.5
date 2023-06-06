@@ -1,6 +1,4 @@
 <?php
-    // include( BLL_HOME . "home_bll.class.singleton.php");
-    
     class shop_model {
 
         private $bll;
@@ -20,8 +18,6 @@
         }
 
         public function get_allcars($args) {
-            // return 'hola model';
-            // return $this -> bll -> get_allcars_BLL();
             return $this -> bll -> get_allcars_BLL($args);
 
         }
@@ -31,7 +27,6 @@
         }
 
         public function get_filters($args) {
-            // return 'hola filters';
             return $this -> bll -> get_filters_BLL($args);
         }
 

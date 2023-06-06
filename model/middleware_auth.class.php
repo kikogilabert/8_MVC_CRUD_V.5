@@ -1,5 +1,4 @@
 <?php
-include(MODEL_PATH . "JWT.class.php");
 class middleware{
     public static function create_token($username){
         $jwt = parse_ini_file(MODEL_PATH . 'php.ini');

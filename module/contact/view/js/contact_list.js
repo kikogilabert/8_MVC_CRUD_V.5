@@ -70,15 +70,12 @@ function click_contact(){
 }
 
 function send(){
-	// console.log('esto que es');
     if(check_email() != 0){
-		// console.log('esto que es222');
 		send_email({name:$("#contact_name").val(), email:$("#contact_email").val(), matter:$("#matter").val(), message:$("#message").val()});
 	}
 }
 
 function send_email(content_email) {
-	// console.log(content_email);
 	ajaxPromise(friendlyURL("?module=contact&op=send_contact_us"), 'POST', 'JSON', content_email) 
 	.then(function (data) {
 		console.log(data);
@@ -90,6 +87,5 @@ function send_email(content_email) {
 }
 
 $(document).ready(function(){
-	// console.log('DENTRO DEL JSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 	click_contact()
 });

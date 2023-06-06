@@ -3,8 +3,6 @@
         public static function send_email($email1) {
             switch ($email1['type']) {
                 case 'contact';
-                // echo json_encode('pepitooooo');
-                // exit;
                     $email['toEmail'] = 'kikogm2004@gmail.com';
                     $email['fromEmail'] = 'kiko.gilabertm@gmail.com';
                     $email['inputEmail'] = 'kiko.gilabertm@gmail.com';
@@ -22,14 +20,14 @@
                     $email['inputMatter'] = 'Email verification';
                     $email['inputMessage'] = "<h2>Verificacion</h2><a href='http://localhost/8_MVC_CRUD_V.5/login/view/verify/$email1[token]'>Click here for verify your email.</a>";
                         break;
-                // case 'recover';
-                //     $email['fromEmail'] = 'secondchanceonti@gmail.com';
-                //     $email['inputEmail'] = 'secondchanceonti@gmail.com';
-                //     $email['inputMatter'] = 'Recover password';
-                //     $email['inputMessage'] = "<a href='http://localhost/Ejercicios/Framework_PHP_OO_MVC/module/login/recover/$email[token]'>Click here for recover your password.</a>";
-                //     break;
+                case 'recover';
+                    $email['toEmail'] = $email1['toEmail'];
+                    $email['fromEmail'] = 'kiko.gilabertm@gmail.com';
+                    $email['inputEmail'] = 'kiko.gilabertm@gmail.com';
+                    $email['inputMatter'] = 'Recover password';
+                    $email['inputMessage'] = "<a href='http://localhost/8_MVC_CRUD_V.5/login/recover_view/recover/$email1[token]'>Click here for recover your password.</a>";
+                    break;
             }
-            // return $email;
             return self::send_mailgun($email);
         }
 

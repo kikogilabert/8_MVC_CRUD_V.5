@@ -1,6 +1,4 @@
 <?php
-    // include( MODEL_PATH . "db.class.singleton.php");
-
     class shop_dao {
         static $_instance;
 
@@ -74,10 +72,6 @@
             }        
         }
         $consulta.= " LIMIT $total_prod, $items_page";
-        // return $consulta;
-        //   echo json_encode($consulta);
-        //   exit;
-
             $stmt = $db -> ejecutar($consulta);
             return $db -> listar($stmt);
         }
@@ -108,8 +102,6 @@
 			AND c.motor_type = '$type'
 			LIMIT $loaded, $items";
 
-            // return $sql;
-
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
         }
@@ -128,8 +120,6 @@
 					AND cc.motor_type = mt.cod_type 
 					AND b.cod_brand = m.cod_brand) AS c";
 		for ($i=0; $i < 1; $i++){
-			// echo json_encode(count($filter));
-			// exit;
 			if ($i==0){
 				if ($filter[$i][0] == 'order'){
 					$consulta.= " ORDER BY " . $filter[$i][1] . " DESC";
@@ -149,8 +139,6 @@
             $stmt = $db -> ejecutar($consulta);
             return $db -> listar($stmt);
         }
-
-      
 // // LIKES
 function select_load_likes($db, $username){
 	$sql = "SELECT l.car_plate FROM likes l WHERE l.id_user = (SELECT u.id_user FROM users u WHERE u.username = '$username');";
@@ -163,7 +151,6 @@ function select_likes($db, $id_car, $username){
 		WHERE i.id_user = (SELECT u.id_user FROM users u WHERE u.username LIKE '$username')
 		AND i.car_plate = '$id_car';";
 
-    // return $sql;
 	$stmt = $db -> ejecutar($sql);
     return $db -> listar($stmt);
 }
@@ -179,8 +166,7 @@ function like($db, $id_car, $username){
 function dislike($db, $id_car, $username){
 	$sql = "DELETE FROM likes WHERE car_plate='$id_car' 
     AND id_user=(SELECT u.id_user FROM users u WHERE u.username= '$username');";
-        // return $sql;
-   $stmt = $db -> ejecutar($sql);
+    $stmt = $db -> ejecutar($sql);
     }
 }
 ?>

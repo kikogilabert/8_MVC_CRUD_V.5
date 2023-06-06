@@ -18,7 +18,6 @@
 		}
 
 		public function get_carrusel_BLL() {
-			// return 'hola alberto y joan';
 			return $this -> dao -> select_data_carrusel($this -> db);
 		}
 
@@ -27,11 +26,9 @@
 		}
 
 		public function get_type_BLL() {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_type($this -> db);
 		}
 		public function get_mostvisited_BLL() {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_most_visited($this -> db);
 		}
 	}

@@ -4,7 +4,6 @@
 function types() {
   ajaxPromise(friendlyURL("?module=home&op=type"), 'POST', 'JSON')
   .then(function( data ) {
-    // console.log(data);
     for (row in data) {
               $('<div></div>').attr('class', "card3").attr({ 'id': data[row].desc_type }).appendTo('#containerTypecar')
                   .html(
@@ -26,7 +25,6 @@ function types() {
 function carrusel(){
   ajaxPromise(friendlyURL("?module=home&op=carrusel"),'POST', 'JSON')
     .then(function(data) {
-      // console.log(data);
         for (row in data) {
             $('<div></div>').attr('class', "card2").attr({ 'id': data[row].cod_brand }).appendTo(".carousel__list").html(
                 "<img src= " + data[row].img_brand + " />"
@@ -55,12 +53,10 @@ function carrusel(){
 
 function category() {
   ajaxPromise(friendlyURL("?module=home&op=category"),'POST', 'JSON')
-.then(function(data) {
-    // console.log(data);
+.then(function(data) {;
     for (row in data) {
 
         $('<div></div>').attr('class', "card").attr({ 'id': data[row].name_cat }).appendTo('.containerCategories')
-        // console.log('hola jjoan');
             .html(
                 "<div class='card_image'>" +
                 "<img src= " + data[row].img_cat + " />" +
@@ -113,7 +109,7 @@ function carousel_most_visited() {
 
 // -----------------YOLANDAAA IMPROVEMENT FOR VISITOR-COUNTER WHEN YOU CLICK FROM TRENDING HOME CARS---------------//
 function visitor_counter(car_plate){
-  ajaxPromise('index.php?module=shop&op=visitor_counter', 'POST', 'JSON', {'id_car' : car_plate})
+  ajaxPromise(friendlyURL('?module=shop&op=visitor_counter'), 'POST', 'JSON', {'id_car' : car_plate})
   .then(function (data) {
   }).catch(function () {
       
@@ -166,7 +162,6 @@ function clicks(){
 
   $(document).on("click",'.card4', function (){
     var car_plate_car = this.getAttribute('id');
-    console.log(car_plate_car);
     var filters = [];
     visitor_counter(car_plate_car);
     filters.push("car_plate",this.getAttribute('id'));
@@ -190,7 +185,6 @@ function load_more_Books_car() {
       
       ajaxPromise('https://www.googleapis.com/books/v1/volumes?q=Cars','GET', 'JSON')
           .then(function(data) {
-            console.log(data);
               if (limit === 9) {
                   $('<button class="no-results" id="">No hay mas libros disponibles....</button></br>').appendTo('.btn-more-books');
               } else {
@@ -229,7 +223,6 @@ function get_Books_car() {
   limit = 9;
   ajaxPromise('https://www.googleapis.com/books/v1/volumes?q=Cars','GET', 'JSON')
       .then(function(data) {
-        // console.log('getbooks', data.items.length);
           data.items.length = limit;
           $('<h2 class="cat">Books releted</h2>').appendTo('.books_content');
           $('<button class="load_more_button" id="load_more_books">LOAD MORE</button>').appendTo('.btn-more-books');

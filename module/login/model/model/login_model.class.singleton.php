@@ -35,6 +35,30 @@
         public function get_verify_email($token) {
             return $this -> bll -> get_verify_email_BLL($token);
         }
+        public function get_controluser($token) {
+            return $this -> bll -> get_controluser_BLL($token);
+        }
 
+        public function get_actividad() {
+            return $this -> bll -> get_actividad_BLL();
+        }
+        
+        public function get_refresh_cookie() {
+            return $this -> bll -> get_refresh_cookie_BLL();
+        }
+        public function get_recover_email($email) {
+            return $this -> bll -> get_recover_email_BBL($email);
+        }
+        public function get_verify_token($email_token) {
+            return $this -> bll -> get_verify_token_BLL($email_token);
+        }
+        public function get_new_password($args) {
+            // return 'hola1';
+            return $this -> bll -> get_new_password_BLL($args);
+        }
+        public function get_social_login($args) {
+            // return 'hola1';
+            return $this -> bll -> get_social_login_BLL($args);
+        }
     }
 ?>

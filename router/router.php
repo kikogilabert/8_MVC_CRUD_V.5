@@ -45,11 +45,9 @@
         private function loadModule() {
             if (file_exists('resources/modules.xml')) {
                 $modules = simplexml_load_file('resources/modules.xml');
-                // die('<script>console.log('.json_encode( 'load module' ) .');</script>');
                 foreach ($modules as $row) {
                     if (in_array($this -> uriModule, (Array) $row -> uri)) {
                         $path = 'module/' . $row -> name . '/controller/controller_' . (String) $row -> name . '.class.php';
-                        // return $path;
                         if (file_exists($path)) {
                             require_once($path);
                             $controllerName = 'controller_' . (String) $row -> name;
@@ -73,7 +71,6 @@
                 }
             }
             throw new Exception('Not Function found.');
-            // return "view";
         }
     }
     

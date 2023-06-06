@@ -1,7 +1,6 @@
 function loadCars(total_prod = 0, items_page = 3) {
-//  //FILTERS-HOME  
-
-var brand_filter =  JSON.parse(localStorage.getItem('filter_brand')) || false;
+  //FILTERS-HOME  
+  var brand_filter =  JSON.parse(localStorage.getItem('filter_brand')) || false;
   var category_filter =  JSON.parse(localStorage.getItem('filter_category')) || false;
   var motor_filter =  JSON.parse(localStorage.getItem('filter_motortype')) || false;
   //NORMAL-FILTERS FROM SHOP
@@ -12,7 +11,7 @@ var brand_filter =  JSON.parse(localStorage.getItem('filter_brand')) || false;
   var car_carrusel =  JSON.parse(localStorage.getItem('filter_car')) || false;
   //REDIRECT LIKE
   var id_car  =  localStorage.getItem('id_car') || false;
-  // console.log(redirect);
+
 
   if(brand_filter != false) {
     ajaxForSearch("?module=shop&op=filters", brand_filter, total_prod, items_page );
@@ -27,20 +26,16 @@ var brand_filter =  JSON.parse(localStorage.getItem('filter_brand')) || false;
   }else if (filter != false) {
     ajaxForSearch("?module=shop&op=filters", filter,  total_prod, items_page );
   } else if (id_car) {
-    console.log('elseif');
     loadDetails(id_car);
     visitor_counter(id_car);
   }else {
-    // console.log('holaaaaa');
     ajaxForSearch("?module=shop&op=allcars", undefined, total_prod, items_page );
   } 
 }
 
 function ajaxForSearch(url, filters, total_prod = 0, items_page = 3) {
-// console.log(filters, total_prod, items_page);
   ajaxPromise(friendlyURL(url), 'POST', 'JSON', {'filter': filters, 'total_prod': total_prod, 'items_page': items_page })
     .then(function (data){
-      console.log(data);
 
       $('#all_maps').empty();
       $('#content_shop_cars').empty();
@@ -51,7 +46,6 @@ function ajaxForSearch(url, filters, total_prod = 0, items_page = 3) {
       //
       $('<div></div>').appendTo('#all_maps')
           .html(
-            // '<hr class=hr-shop>'+
             '<br/>'+
             '<h2>FIND OUR BEST RATED CARS</h2>' + 
                 '<br/>' + 
@@ -71,12 +65,11 @@ function ajaxForSearch(url, filters, total_prod = 0, items_page = 3) {
             '</div>'+
             '</div>'
             )
-
       //YOLANDA Mejora para que cuando no hayan resultados en los filtros aplicados
       if (data == "error") {
         $('<div></div>').appendTo('#content_shop_cars')
           .html(
-            '<h3>¡No se encuentarn resultados con los filtros aplicados!</h3>'
+            '<h3>¡No se encuentran resultados con los filtros aplicados!</h3>'
           )
       } else {
         for (row in data) {
@@ -88,35 +81,32 @@ function ajaxForSearch(url, filters, total_prod = 0, items_page = 3) {
               "<br>"+
               "<body>"+
               "<div class='product-container'>" +
-              
-              "<div class='list_product'>" +
-              "<div class='img-container'>" +
-              "<img src= '" + data[row].img_car + "'" + "</img>" +
-              "<h1><b class='placement'>" + data[row].cod_brand + " " + data[row].name_model +"<div id='" + data[row].car_plate + "' class='list_heart'></div>"+ "</b></h1>" +
-              "</div>" +
-              "<div class='product-info'>" +
-              "<div class='product-content'>" +
-              
-              // "<p>Up-to-date maintenance and revisions</p>" +
-              "<ul class='derecha'>" +
-              "<li>" + "CAR PLATE:   " + data[row].car_plate  + "</li>" +
-              "<li>" + "LICENSE NUM:   " + data[row].license_number + "</li>" +
-              "<li>" + data[row].km + " KM" + "</li>" +
-              "<li>" + "ENGINE TYPE:   " + data[row].desc_type + "</li>" +
-              "<li>" + "COLOR:   "  + data[row].color + "</li>" +
-              "<li>" + "PRICE:   "  + data[row].price + '€' + "</li>" +
-              "<li class='botones'>" +"<div>" +
-              "<a class='button-85' id='" + data[row].car_plate +"'> Add to Cart</a>" + "&nbsp; &nbsp;" +
-              "<button id='" + data[row].car_plate + "' class='more_info_list' >More Info</button>" +
-              // "<button class='button buy' >Buy</button>" +
-              "</div>" +
-              "</ul>" +
-              "</div>" +
-              "</div>" +
-              "</div>" +
+                "<div class='list_product'>" +
+                  "<div class='img-container'>" +
+                    "<img src= '" + data[row].img_car + "'" + "</img>" +
+                    "<h1><b class='placement'>" + data[row].cod_brand + " " + data[row].name_model + "</b></h1>" +
+                  "</div>" +
+                  "<div class='product-info'>" +
+                    "<div class='product-content'>" +
+                      "<ul class='derecha'>" +
+                        "<li>" + "CAR PLATE:   " + data[row].car_plate  + "</li>" +
+                        "<li>" + "LICENSE NUM:   " + data[row].license_number + "</li>" +
+                        "<li>" + data[row].km + " KM" + "</li>" +
+                        "<li>" + "ENGINE TYPE:   " + data[row].desc_type + "</li>" +
+                        "<li>" + "COLOR:   "  + data[row].color + "</li>" +
+                        "<li>" + "PRICE:   "  + data[row].price + '€' + "</li>" +
+                        "<li class='botones'>" +
+                        "<div>" +
+                          "<a class='button-85' id='" + data[row].car_plate +"'> Add to Cart</a>" + "&nbsp; &nbsp;" +
+                          "<button id='" + data[row].car_plate + "' class='more_info_list' >More Info</button>" +
+                          "<div id='" + data[row].car_plate + "' class='list_heart'></div>"+
+                        "</div>" +
+                      "</ul>" +
+                    "</div>" +
+                  "</div>" +
+                "</div>" +
               "</div>"+
               "</div>"+
-              // "<div id='pagination'></div>"+
               "</body>"
             )}
         load_likes_user();
@@ -138,24 +128,18 @@ function clicks() {
   $(document).on("click", ".button_pagination", function () {
     var num = this.getAttribute('id');
     total_prod = 3 * (num - 1);
-    // console.log(total_prod);
     loadCars(total_prod, 3);
-    // console.log('botonazo')
   });
 
   $(document).on("click",".list_heart", function() {
     var car_plate = this.getAttribute('id');
     click_like(car_plate, "list_all");
-    // console.log(car_plate);
   });
 
   $(document).one( "click",".details_heart", function() {
-      var car_plate = this.getAttribute('id');
-        // console.log('dentro details');
+      var car_plate = this.getAttribute('id');        
       click_like(car_plate, "details");
       loadDetails(car_plate);
-      // console.log(car_plate);
-    // $(this).off('click'); 
 });
 
 $(document).on("click", ".button-85", function () {
@@ -180,7 +164,6 @@ function loadDetails(car_plate){
   $('#content_shop_cars').empty();
   ajaxPromise(friendlyURL('?module=shop&op=details_car'), 'POST', 'JSON', {'car_plate' : car_plate}) 
     .then(function (data) {
-      // console.log(data);
       $('.filter_car').empty();
       $('.div-maps').empty();
       $('#content_shop_cars').empty();
@@ -228,10 +211,9 @@ function loadDetails(car_plate){
           "<h3><b>" + "More Information:" + "</b></h3>" +
           "<p>This vehicle has a 2-year warranty and reviews during the first 6 months from its acquisition.</p>" +
           "<div class='buttons_details'>" +
-          "<a class='button add' href='#'>Add to Cart</a>" +
-          "<a class='button buy' href='#'>Buy</a>" +
+          "<a class='button-85' id='" + data[0][0].car_plate +"'> Add to Cart</a>" + "&nbsp; &nbsp;" +
+
           "<span class='button' id='price_details'>" + data[0][0].price + "<i class='fa-solid fa-euro-sign'></i> </span>" +
-          // "<a class='details_heart' id='" + data[0].car_plate +"'><i id=" + data[0].car_plate + " class='fa-solid fa-heart fa-lg'></i></a>" +
           "</div>" +
           "</div>" +
           "</div>" +
@@ -249,13 +231,11 @@ function loadDetails(car_plate){
           next: '.glider-next'
         }
       });
-       
       setTimeout(function(){
         localStorage.removeItem('filter_car')
       }, 2000); 
     
       id_car = localStorage.getItem('id_car') || false;
-      // console.log(id_car);
       if (id_car){
           click_like(car_plate, "details");
           load_likes_user();
@@ -276,11 +256,10 @@ function loadDetails(car_plate){
 
 
 function print_filters() {
-  // $('.mierda').empty();
   $('<div class="div-filters"></div>').appendTo('.filters')
-      .html('<select class="filter_type">' +
+      .html(
+        "<br/>"+
       "<form>" +
-      "<input type='text' class='mierda' placeholder='hola'</form>" +
       "<div class='col-md-6 mb-2'>" +
       "<div class='form-group'>" +
       "<label for='motor_type'>Motor Type</label>" +
@@ -403,16 +382,13 @@ $(function(){
     localStorage.setItem('filter', JSON.stringify(filter));
     var filter = JSON.parse(localStorage.getItem('filter')) || false;
     
-    // console.log(filter);
     if (filter) {
-      // console.log(filter);
       ajaxForSearch("?module=shop&op=filters",  filter);
       pagination(filter);
     }
     else {
       ajaxForSearch("?module=shop&op=allcars");
     }
-
   });
 }
 
@@ -420,7 +396,6 @@ function load_details() {
   $(document).on('click', '.link', function () {
     var id = this.getAttribute('id');
     loadDetails(id);
-    console.log('detalles: ', id);
   })
 }
 
@@ -449,12 +424,11 @@ function mapBox_all(data) {
   const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: ['-1.005300392580198', '40.02804327191509'], // starting position [lng, lat] , 
+      center: ['-1.005300392580198', '40.02804327191509'], // starting position [lng, lat]
       zoom: 4 // starting zoom
   });
 
   for (row in data) {
-      // console.log('holaaa');
       const marker = new mapboxgl.Marker()
       const minPopup = new mapboxgl.Popup()
       minPopup.setHTML('<h3 style="text-align:center;">' + data[row].cod_brand + '</h3><p style="text-align:center;">Modelo: <b>' + data[row].name_model + '</b></p>' +
@@ -468,20 +442,18 @@ function mapBox_all(data) {
 }
 
 function mapBox(data) {
-  // console.log(id);
-  // console.log(id.lon, id.lat);
   mapboxgl.accessToken = 'pk.eyJ1IjoiMjBqdWFuMTUiLCJhIjoiY2t6eWhubW90MDBnYTNlbzdhdTRtb3BkbyJ9.uR4BNyaxVosPVFt8ePxW1g';
   const map = new mapboxgl.Map({
       container: 'map2',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [data[0][0].lon, data[0][0].lat], // starting position [lng, lat] , 
+      center: [data[0][0].lon, data[0][0].lat], // starting position [lng, lat]
       zoom: 6// starting zoom
   });
   const marker = new mapboxgl.Marker()
   const minPopup = new mapboxgl.Popup()
   minPopup.setHTML('<h4>' + data[0][0].cod_brand + '</h4><p>Modelo: ' + data[0][0].name_model + '</p>' +
       '<p>Precio: ' + data[0][0].price + '€</p>' +
-      '<img class="fotillo" src=" ' + data[0].img_car + '"/>')
+      '<img class="fotillo" src=" ' + data[0][0].img_car + '"/>')
   marker.setPopup(minPopup)
       .setLngLat([data[0][0].lon, data[0][0].lat])
       .addTo(map);
@@ -512,7 +484,6 @@ function cars_related(loadeds = 0, type_car, total_items) {
   let total_item = total_items;
   ajaxPromise(friendlyURL('?module=shop&op=cars_related'), 'POST', 'JSON', {'type': type, 'loaded': loaded, 'items': items })
       .then(function(data) {
-        // console.log(data);
           if (loaded == 0) {
               $('<div></div>').attr({ 'id': 'title_content', class: 'title_content' }).appendTo('.results')
                   .html(
@@ -570,12 +541,10 @@ function cars_related(loadeds = 0, type_car, total_items) {
 }
 
 function more_cars_related(type_car) {
-  // console.log('hola cars related');
   var type_car = type_car;
   var items = 0;
   ajaxPromise(friendlyURL('?module=shop&op=count_cars_related'), 'POST', 'JSON',{'type_car': type_car})
       .then(function(data) {
-        // console.log(data);
           var total_items = data[0].n_prod;
           cars_related(0, type_car, total_items);
           $(document).on("click", '.load_more_button', function() {
@@ -596,20 +565,16 @@ function pagination(filter) {
     var url = "?module=shop&op=count_filters_search";
   
   } else if (filter_home){
-    console.log('entra en el elseif');
     var url = "?module=shop&op=count_filters_home";
 
-  } else if (filter != null){
-    // console.log('filterfilterfilterfilterfilterfilterfilterfilterfilter');
+  } else if (filter){
     var url = "?module=shop&op=count_filters_shop";
   
   } else {
     var url = "?module=shop&op=count_filters";
   }
-// console.log(filter_home.value);
   ajaxPromise(friendlyURL(url), 'POST', 'JSON', {'filter': filter, 'filter_home': filter_home, 'filter_search': filters_search })
       .then(function(data) {
-        // console.log(data);
           var total_prod = data[0].counts;
           if (total_prod >= 3) {
               total_pages = Math.ceil(total_prod / 3)
@@ -620,36 +585,27 @@ function pagination(filter) {
             for (let i = 1; i <= total_pages; i++) {
                 $('<div></div>').attr({ 'id':  i }).appendTo(".pagination").html(
                 " <div class='paginationcss'>" +
-                // "<h1>" +" " +"</h1>" +
                 '<button class="button_pagination" id='+ i +'>'+ i +"     " + '</button>' +
-                // "<br/>"+
                 "</div>"
                 )
-    
             } 
-        // loadCars(0, 3);
           });
         
 }
 
-// // LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
-// // LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
-// // LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
+  ////LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
+  ////LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
+  ////LIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKESLIKES
 
 function click_like(id_car, lugar) {
   var token = localStorage.getItem('token');
   if (token){
       ajaxPromise( friendlyURL("?module=shop&op=control_likes"), 'POST', 'JSON', { 'id_car': id_car, 'token': token })
         .then(function (data){
-            console.log(data);
-            // console.log('esto es del click like');
-          //YOLANDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            //MIRA ESTA MILLORA
+          //YOLANDAAAAAAAAAAAAAAA MIRA ESTA MILLORA
             if(lugar === "details"){
-              // console.log('console1');
               $("#" + id_car + ".details_heart").toggleClass('is-active');
             }else{
-              // console.log('console2');
               $("#" + id_car + ".list_heart").toggleClass('is-active');
             }
           }).catch(function() {
@@ -658,19 +614,17 @@ function click_like(id_car, lugar) {
   } else {
       localStorage.setItem('id_car', id_car);
       toastr.warning("Debes de iniciar session");
-      setTimeout("location.href = '?module=login&op=view'" , 2000);
+      setTimeout("window.location.href = friendlyURL('?module=login')", 2000);
   }
 }
 
 function load_likes_user() {
   var token = localStorage.getItem('token');
   if (token) {
-    // console.log('dentro del token');
       ajaxPromise(friendlyURL("?module=shop&op=load_likes_user"),'POST', 'JSON', {'token': token }) 
           .then(function(data) {
-            console.log(data);
               for (row in data) {
-                //YOLANDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                //YOLANDAAAAAAAAAAAAAAAAAAAA
                 //MIRA ESTA MILLORA
                 $("#" + data[row].car_plate + ".details_heart").toggleClass('is-active'); 
                 $("#" + data[row].car_plate + ".list_heart").toggleClass('is-active');
@@ -682,31 +636,28 @@ function load_likes_user() {
   }
 }
 
-// function add_cart(car_plate){
-//   // console.log('add_cart log');
-//   var token = localStorage.getItem('token');
-//   if(token){
-//       ajaxPromise('module/cart/ctrl/ctrl_cart.php?op=insert_cart', 'POST', 'JSON', { 'id_car': car_plate, 'token' : token })
-//       .then(function(data) { 
-//         console.log(data);
-//           //toastr
-//       }).catch(function() {
-//         console.log('CATCH');
-//           window.location.href = 'index.php?page=error503'
-//       });   
-//     }else{
-//       // localStorage.setItem('id_car', id_car);
-//       toastr.warning("Debes de iniciar session");
-//       setTimeout("location.href = 'index.php?page=ctrl_login&op=list';", 2000);
-//     }
-// }
-console.log('dentro del shop js2');
+function add_cart(car_plate){
+  var token = localStorage.getItem('token');
+  if(token){  
+      ajaxPromise(friendlyURL("?module=cart&op=insert_cart"), 'POST', 'JSON', { 'id_car': car_plate, 'token' : token })
+      .then(function(data) { 
+        toastr.success("Car added to your basket");
+      }).catch(function() {
+        console.log('CATCH');
+          window.location.href = 'index.php?page=error503';
+      });   
+    }else{
+      toastr.warning("Debes de iniciar session");
+      setTimeout("window.location.href = friendlyURL('?module=login')", 2000);
+    }
+}
 
 $(document).ready(function () {
   loadCars();
+  pagination();
   print_filters();
   filter_button();
   clicks();
   remove_filters();
-  pagination();
+  
 });

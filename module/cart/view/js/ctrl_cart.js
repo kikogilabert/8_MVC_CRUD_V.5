@@ -1,8 +1,6 @@
-// console.log('dentro de cart js');
 function load_cart(){
     var token = localStorage.getItem('token');
-    // console.log('holaaaaa load cart');
-        ajaxPromise("module/cart/ctrl/ctrl_cart.php?op=load_cart", 'POST', 'JSON', {'token': token})
+        ajaxPromise(friendlyURL("?module=cart&op=load_cart"), 'POST', 'JSON', {'token': token})
         .then(function(data) {
             console.log(data);
             var total_price_cars = 0;
@@ -54,7 +52,6 @@ function load_cart(){
                         var total = total_price_cars + tax + shipping;
                         console.log(total);
                     
-                        // console.log(total_price_cars);
             $(".total-prices").append(
                 '<div class="totals">'+
                     '<div class="totals-item">'+
@@ -99,43 +96,7 @@ function load_cart(){
             });   
     }
     
-    // /* Assign actions */
-    // $('.product-quantity input').change( function() {
-    // updateQuantity(this);
-    // });
-
-
-
-    // /* Recalculate cart */
-    // function recalculateCart()
-    // {
-    // var subtotal = 0;
-
-    // // /* Sum up row totals */
-    // // $('.product-cart').each(function () {
-    // subtotal += parseFloat($(this).children('.product-line-price').text());
-    // });
-
-    // /* Calculate totals */
-
-    // /* Update totals display */
-    // $('.totals-value').fadeOut(fadeTime, function() {
-    // $('#cart-subtotal').html(subtotal.toFixed(2));
-    // $('#cart-tax').html(tax.toFixed(2));
-    // $('#cart-shipping').html(shipping.toFixed(2));
-    // $('#cart-total').html(total.toFixed(2));
-    // if(total == 0){
-    //     $('.checkout').fadeOut(fadeTime);
-    // }else{
-    //     $('.checkout').fadeIn(fadeTime);
-    // }
-    // $('.totals-value').fadeIn(fadeTime);
-    // });
-    // }
-
-// REMOVE   
-
-    /* Remove item from cart */
+    /////////////////////REMOVE/////////////////////////////
 
         $(document).on("click",".remove-product", function() {
             var car_plate = this.getAttribute('id');
@@ -143,36 +104,27 @@ function load_cart(){
         });
                 function remove_cart(id_car){
                         var token = localStorage.getItem('token');
-                        ajaxPromise("module/cart/ctrl/ctrl_cart.php?op=delete_cart", 'POST', 'JSON', { 'token' : token , 'id_car' : id_car})
+                        ajaxPromise(friendlyURL("?module=cart&op=remove_product"), 'POST', 'JSON', {'token' : token ,'id_car' : id_car})
                         .then(function(data) { 
                             console.log(data);
-                            // $("." + id_car ).slideUp(); 
                             $("#" + id_car + ".product-cart").slideUp(); 
-                            // $("." + id_car).empty();
                             $("#" + id_car + ".product-cart").remove();
-                            setTimeout(location.reload(), 2000);
-                                // toastr.info("Product removed succesfully");            
-                                // PROVISIONAL
-                                    // recalculateCart();
+                            setTimeout(location.reload(), 3000);
                                 }).catch(function() {
                                 console.log('catchhhhh');
                             window.location.href = 'index.php?page=error503';
                     }
                 )};
-                
-//CHANGE QTY 
- 
-    /* Change item qty from cart */
+
     
     function change_qty(){
         $(document).on('input','.quantity-field',function () {
             var token = localStorage.getItem('token');
             var car_plate =  this.getAttribute('id');
             var qty = $("#" + car_plate + ".quantity-field").val();
-            // $("#country.save")
             console.log(qty);
             console.log(car_plate);
-                ajaxPromise("module/cart/ctrl/ctrl_cart.php?op=update_qty",  'POST', 'JSON', { 'token' : token, 'id_car': car_plate, 'qty': qty})
+                ajaxPromise(friendlyURL("?module=cart&op=update_qty"),  'POST', 'JSON', { 'token' : token, 'id_car': car_plate, 'qty': qty})
                 .then(function(data) {
                     console.log(data); 
                     location.reload();
@@ -187,22 +139,19 @@ function load_cart(){
 function checkout(){
     var token =  localStorage.getItem('token');
     $(document).on('click','#checkout-button',function () {
-        ajaxPromise("module/cart/ctrl/ctrl_cart.php?op=checkout", 'POST', 'JSON', {'token' : token})
+        ajaxPromise(friendlyURL("?module=cart&op=checkout"), 'POST', 'JSON', {'token' : token})
             .then(function(data) {
                 console.log(data);
                 location.reload();
-                // window.location.href = 'index.php?page=ctrl_home&op=homepage'
+                toastr.sucesss("Checkout Completed");
             }).catch(function() {
-                // window.location.href = 'index.php?page=error503'
                 console.log('DENTR0 DEL CATCH');
             });   
         });
 }
 
 $(document).ready(function(){
-    // console.log('dentro de cart js1');
     load_cart();
-    // recalculate_cart();
     change_qty();
     checkout();
 });

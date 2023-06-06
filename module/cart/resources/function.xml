@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>view</name>
+        <uri>view</uri>
+    </function>
+    <function>
+        <name>load_cart</name>
+        <uri>load_cart</uri>
+    </function>
+    <function>
+        <name>insert_cart</name>
+        <uri>insert_cart</uri>
+    </function>
+    <function>
+        <name>remove_product</name>
+        <uri>remove_product</uri>
+    </function>
+    <function>
+        <name>update_qty</name>
+        <uri>update_qty</uri>
+    </function>
+    <function>
+        <name>checkout</name>
+        <uri>checkout</uri>
+    </function>
+</functions>

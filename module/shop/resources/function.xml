@@ -52,8 +52,4 @@
         <name>load_likes_user</name>
         <uri>load_likes_user</uri>
     </function>
-    <!-- <function>
-        <name>most_visited</name>
-        <uri>most_visited</uri>
-    </function> -->
 </functions>

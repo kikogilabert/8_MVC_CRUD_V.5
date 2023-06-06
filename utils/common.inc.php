@@ -4,34 +4,26 @@
             require_once (VIEW_PATH_INC . 'top_page.php');
             require_once (VIEW_PATH_INC . 'header.php');
             require_once (VIEW_PATH_INC . 'error404.html');
-            // require_once (VIEW_PATH_INC . 'footer.php');
-        }
+            }
         
         public static function load_view($topPage, $view) {
             $topPage = VIEW_PATH_INC . $topPage;
             if ((file_exists($topPage)) && (file_exists($view))) {
                 require_once ($topPage);
-                // require_once (VIEW_PATH_INC . 'header.php');
                 require_once (VIEW_PATH_INC . 'menu.php');
                 require_once ($view);
-                // return 'holaaaa';
 
             }else {
                 self::load_error();
             }
-            // return $topPage;
         }
         public static function load_model($model, $function = null, $args = null) {
             $dir = explode('_', $model);
-            // return $dir;
             $path = constant('MODEL_' . strtoupper($dir[0])) .  $model . '.class.singleton.php';
-            // return $path;
             if (file_exists($path)) {
                 require_once ($path);
                 if (method_exists($model, $function)){
-                    // return $function;
                     $obj = $model::getInstance();
-                    // echo json_encode($args);
                     if ($args != null) {
                         return call_user_func(array($obj, $function), $args);
                     }

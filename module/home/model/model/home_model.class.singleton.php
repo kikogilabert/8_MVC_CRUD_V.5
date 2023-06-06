@@ -7,7 +7,6 @@
         
         function __construct() {
             $this -> bll = home_bll::getInstance();
-            // $this -> db = db::getInstance();
         }
 
         public static function getInstance() {

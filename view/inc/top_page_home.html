@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
-
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <title>EGOCARS</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -17,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
-    <link href="view/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo SITE_PATH ?>view/assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Libraries CSS Files -->
@@ -29,62 +27,46 @@
     <!-- Main Stylesheet File -->
     <link href="<?php echo SITE_PATH ?>view/assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-        Theme Name: EstateAgency
-        Theme URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
-        Author: BootstrapMade.com
-        License: https://bootstrapmade.com/license/
-    ======================================================= -->
-
-
-        <meta charset="utf-8">
-        <title>Alta del coche</title>
-      
-        <!-- <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="//rawgit.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
-
-		<!-- JQUERY -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-		<!-- <script src="<?php echo SITE_PATH ?>module/user/model/validate_cars.js"></script> -->
-		<script type="text/javascript" src="<?php echo SITE_PATH ?>view/js/utils.js"></script>
-    	<script type="text/javascript">
-        	$(function() {
-        		$('#fecha').datepicker({
-        			dateFormat: 'dd/mm/yy', 
-        			changeMonth: true, 
-        			changeYear: true, 
-        			yearRange: '1900:2023',
-        			onSelect: function(selectedDate) {
-        			}
-        		});
-        	});
-	    </script>
-            <!-- HOME -->
-        <script src="<?php echo SITE_PATH ?>module/home/view/js/controller_home.js"></script>
-        <script src="<?php echo SITE_PATH ?>module/search/view/js/controller_search.js"></script>
-
-        
-        <script src="<?php echo SITE_PATH ?>view/glider/glider.js"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo SITE_PATH ?>view/glider/glider.css">
-        <!-- SEARCH -->
-
-
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-
-            <!-- ACTIVITY USER -->
-    <script src="<?php echo SITE_PATH ?>view/js/activity_user.js"></script>
-            
-            <!-- EMOTES -->
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     
-            
-    </head>
-    <body>
+    <!-- JQUERY -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="<?php echo SITE_PATH ?>view/js/utils.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#fecha').datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1900:2023',
+                onSelect: function (selectedDate) {}
+            });
+        });
+    </script>
+    <!-- HOME -->
+    <script src="<?php echo SITE_PATH ?>module/home/view/js/controller_home.js"></script>
+    <!-- SEARCH -->
+    <script src="<?php echo SITE_PATH ?>module/search/view/js/controller_search.js"></script>
+
+
+    <script src="<?php echo SITE_PATH ?>view/glider/glider.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo SITE_PATH ?>view/glider/glider.css">
+    <!-- SEARCH -->
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <!-- ACTIVITY USER -->
+    <script src="<?php echo SITE_PATH ?>view/js/activity_user.js"></script>
+
+    <!-- EMOTES -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+
+    </head> 
+</html>

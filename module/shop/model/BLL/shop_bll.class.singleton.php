@@ -33,10 +33,6 @@
 		}
 
 		public function get_filters_BLL($args) {
-				// return 'hola blllll';
-			// echo json_encode($args);
-			// exit;
-			// return $args;
 			return $this -> dao -> select_data_filters($this -> db, $args[0], $args[1], $args[2]);
 		}
 
@@ -44,62 +40,49 @@
 
 
 		public function get_count_BLL() {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_count($this -> db);
 		}
 
 		public function get_count_filters_home_BLL($args) {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_count_filters($this -> db, $args);
 		}
 
 
 		public function get_count_filters_shop_BLL($args) {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_count_filters($this -> db, $args);
 		}
 
 
 		public function get_count_filters_search_BLL($args) {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_count_filters($this -> db, $args);
 		}
 
 		public function get_visitorcount_BLL($args){
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_visitor_counter($this -> db, $args);
 		}
 		public function get_count_cars_related_BLL($args) {
-			// return 'type bblblblblblblbl';
 			return $this -> dao -> select_data_more_count_cars_related($this -> db, $args);
 		}
 
 		public function get_cars_related_BLL($args) { 
-			// return $args[1];
 			return $this -> dao -> select_data_cars_related($this -> db, $args[0], $args[1], $args[2]);
 		}
 
 		public function get_load_likes_user_BLL($token) {
-			// return 'hola load';
 			$check = middleware::decode_token($token);
-			// return $check['username'];
 			return $this -> dao -> select_load_likes($this -> db, $check['username']);
 		}
 
 	
 	public function get_control_likes_BLL($args) {
 		$token=$args[1];
-		// return $token;
 		$id=$args[0];
 		if ($token){
 			$check = middleware::decode_token($token);
-				// return $check['username'];
 				if (empty( $this -> dao ->select_likes($this->db, $id, $check['username']))) {
-						// return 'holaaa if';
 						$this -> dao -> like($this -> db, $id, $check['username']);
 						return 'like';
 				}else{   
-					// return 'hola else';        
 						$this -> dao -> dislike($this -> db, $id, $check['username']);     
 						return 'dislike';
 					}

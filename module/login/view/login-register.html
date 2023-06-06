@@ -3,8 +3,6 @@
 <head>
     <link href="module/login/view/css/login.css" rel="stylesheet" type="text/css" />
 </head>
-
-
 <body>
 <br>
 <br>
@@ -19,7 +17,6 @@
                 In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
             <div class="login-form">
-
                 <form id="login__form" method="POST">
                     <div class="sign-in-htm">
                         <div class="group">
@@ -31,14 +28,26 @@
                             <label for="pass" class="label">Password</label>
                             <input id="passwd_log" type="password" class="input" name="passwd_log">
                             <span id="error_passwd_log" class="error"></span>
-
                         </div>
                         <div class="group">
                             <input type="submit" id="login" class="button" value="Sign In">
                         </div>
                         <div class="hr"></div>
+                        <label class="label"></label>
+                        <div class="social_login">
+                            <div class="google_login" id="google">
+                                <img class="google_img" src="view/img/google2.png"/>
+                            </div>
+                            <div class="github_login" id="github">
+                                <img class="github_img" src="view/img/github.png"/> 
+                            </div>
+                        </div>
+                        <br/>
                         <div class="foot-lnk">
                             <label for="tab-2">You don't have an account? </label>
+                        </div>
+                        <div class="foot-lnk">
+                            <label ><a id="recover">Forgot your password?</a></label>
                         </div>
                     </div>
                 </form>
@@ -74,11 +83,25 @@
                         </div>
                     </div>
                 </form>
-
+                <div class="forget_html">
+                    <form id="recover_email_form" method="post">
+                        <div class="forget_html">
+                           <label class="tab">Recover Password</label>
+                        <div class="forget">
+                            <div class="group">
+                                <label for="email_forg" class="label">Email</label>
+                                <input id="email_forg" name="email_forg" type="text" class="input" placeholder="example@gmail.com">
+                                <span id="error_email_forg" class="error"></span>
+                            </div>
+                            <div class="group button_forget">
+                                <input type="submit" id="button_recover" class="button" value="Send email">
+                            </div>
+                        </div>
+                    </div>
+                    </form>  
+                </div>             
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

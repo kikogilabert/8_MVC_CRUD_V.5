@@ -43,7 +43,8 @@ function load_menu() {
         '</li>'+
 
         '<li class="nav-item">'+
-        '<div class="cart-shop"></div>'+
+        '<div class="cart-shop">'+
+        '</div>'+
         '</li>'+
         '</div>'+
         '</ul>'
@@ -52,10 +53,8 @@ function load_menu() {
 
     var token = localStorage.getItem('token');
     if (token) {
-        // console.log('dentro token utils');
-        ajaxPromise('?module=login&op=data_user', 'POST', 'JSON', {token})
+        ajaxPromise(friendlyURL('?module=login&op=data_user'), 'POST', 'JSON', {token})
             .then(function(data) {
-                console.log(data);
                 if (data[0].type_user == "client") {
                     console.log("Client loged");
                     $('.opc_CRUD').empty();
@@ -79,7 +78,7 @@ function load_menu() {
                     .html(
                         '<a>' + data[0].username + '<a/>'
                     )
-                    $('<a id="button_cart" href="index.php?page=ctrl_cart&op=view"><i class="fa-solid fa-cart-shopping fa-2xl"></i></a>').appendTo('.cart-shop');
+                    $('<a id="button_cart" href="' + friendlyURL("?module=cart") + '"><i class="fa-solid fa-cart-shopping fa-2xl"></i></a>').appendTo('.cart-shop');
             }).catch(function() {
                 console.log("Error al cargar los datos del user");
             });
@@ -90,8 +89,6 @@ function load_menu() {
         $('#user_info').hide();
         $('.log-icon').empty();
         $('#des_inf_user').empty();
-        // $('<a href="index.php?module=ctrl_login&op=list"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
-
 
     }
 }
@@ -126,7 +123,6 @@ function friendlyURL(url) {
         	link += "/" + aux[1];
         }
     }
-    // console.log(link);
     return "http://localhost/8_MVC_CRUD_V.5" + link;
 }
 
@@ -135,5 +131,4 @@ function friendlyURL(url) {
 $(document).ready(function() {
     load_menu();
     click_logout();
-    // click_shop();
 });

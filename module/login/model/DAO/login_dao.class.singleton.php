@@ -14,7 +14,7 @@
         }
         
         function select_email($db, $email){
-			$sql = "SELECT email FROM users WHERE email='$email'";
+			$sql = "SELECT email FROM users WHERE email='$email' AND uid= ''";
             $stmt = $db -> ejecutar($sql);
             return $db -> listar($stmt);
 		}
@@ -45,9 +45,9 @@
         public function select_verify_email($db, $token_email){
 
 			$sql = "SELECT email_token FROM users WHERE email_token = '$token_email'";
-            $stmt = $db->ejecutar($sql);
-            // return $sql;
-            return $db->listar($stmt);
+            // $stmt = $db->ejecutar($sql);
+            return $sql;
+            // return $db->listar($stmt);
         } 
 
         public function update_verify_email($db, $token_email){
@@ -58,6 +58,49 @@
             // return $sql;
             // return "update";
         }
+        //mirar consultas
+        public function select_recover_password($db, $email){
+			$sql = "SELECT email FROM users WHERE email = '$email' AND password NOT LIKE ('')";
+            // return $sql;
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+        public function update_recover_password($db, $email, $token_email){
+			$sql = "UPDATE users SET email_token = '$token_email' WHERE email = '$email'";
+            // return $sql;
+            $stmt = $db->ejecutar($sql);
 
+            return "ok";
+        }
+        public function update_new_password($db, $token_email, $password){
+            $sql = "UPDATE `users` SET `password`= '$password', `email_token`= '' WHERE `email_token` = '$token_email'";
+            // return $sql;
+            $stmt = $db->ejecutar($sql);
+
+            return "done";
+        }
+
+        public function compare_password($db, $token_email){
+            $sql = "SELECT password FROM users WHERE `email_token` = '$token_email'";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        // SOCIAL LOGIN
+
+        public function select_social_login($db, $id){
+
+            $sql = "SELECT * FROM users WHERE uid='$id'";
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        }
+
+        public function insert_social_login($db, $id, $username, $email, $avatar){
+
+            $sql ="INSERT INTO users (username, password, email, type_user, avatar, email_token, activated, uid)     
+                VALUES ('$username', '', '$email', 'client', '$avatar', '', 1, '$id')";
+
+            return $stmt = $db->ejecutar($sql);
+        }
     }
 ?>
