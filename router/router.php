@@ -14,14 +14,15 @@
         private $nameModule;
         static $_instance;
         
-        public static function getInstance() {      /// Crea el constructor si no exixte
+//////
+        public static function getInstance() {
             if (!(self::$_instance instanceof self)) {
                 self::$_instance = new self();
             }
             return self::$_instance;
         }
     
-        function __construct() {   
+        function __construct() {
             if(isset($_GET['module'])){
                 $this -> uriModule = $_GET['module'];
             }else{
@@ -38,7 +39,7 @@
             try {
                 call_user_func(array($this -> loadModule(), $this -> loadFunction()));
             }catch(Exception $e) {
-                echo "error222222222";
+                common::load_error();
             }
         }
         
@@ -73,5 +74,4 @@
             throw new Exception('Not Function found.');
         }
     }
-    
     router::getInstance() -> routingStart();

@@ -4,15 +4,15 @@
         <name>brand</name>
         <uri>brand</uri>
     </function>
-     <function>
+    <function>
         <name>category_null</name>
         <uri>category_null</uri>
     </function>
-     <function>
+    <function>
         <name>category</name>
         <uri>category</uri>
     </function>
-      <function>
+    <function>
         <name>autocomplete</name>
         <uri>autocomplete</uri>
     </function>

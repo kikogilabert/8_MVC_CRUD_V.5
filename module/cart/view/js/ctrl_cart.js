@@ -2,7 +2,6 @@ function load_cart(){
     var token = localStorage.getItem('token');
         ajaxPromise(friendlyURL("?module=cart&op=load_cart"), 'POST', 'JSON', {'token': token})
         .then(function(data) {
-            console.log(data);
             var total_price_cars = 0;
             var taxRate = 0.05;
             var shippingRate = 15.00; 
@@ -50,7 +49,6 @@ function load_cart(){
                     var tax = total_price_cars * taxRate;
                         var shipping = (total_price_cars > 0 ? shippingRate : 0);
                         var total = total_price_cars + tax + shipping;
-                        console.log(total);
                     
             $(".total-prices").append(
                 '<div class="totals">'+
@@ -106,7 +104,6 @@ function load_cart(){
                         var token = localStorage.getItem('token');
                         ajaxPromise(friendlyURL("?module=cart&op=remove_product"), 'POST', 'JSON', {'token' : token ,'id_car' : id_car})
                         .then(function(data) { 
-                            console.log(data);
                             $("#" + id_car + ".product-cart").slideUp(); 
                             $("#" + id_car + ".product-cart").remove();
                             setTimeout(location.reload(), 3000);
@@ -122,11 +119,8 @@ function load_cart(){
             var token = localStorage.getItem('token');
             var car_plate =  this.getAttribute('id');
             var qty = $("#" + car_plate + ".quantity-field").val();
-            console.log(qty);
-            console.log(car_plate);
                 ajaxPromise(friendlyURL("?module=cart&op=update_qty"),  'POST', 'JSON', { 'token' : token, 'id_car': car_plate, 'qty': qty})
                 .then(function(data) {
-                    console.log(data); 
                     location.reload();
                 }).catch(function() {
                     window.location.href = 'index.php?page=error503'
@@ -141,9 +135,8 @@ function checkout(){
     $(document).on('click','#checkout-button',function () {
         ajaxPromise(friendlyURL("?module=cart&op=checkout"), 'POST', 'JSON', {'token' : token})
             .then(function(data) {
-                console.log(data);
-                location.reload();
                 toastr.sucesss("Checkout Completed");
+                location.reload();
             }).catch(function() {
                 console.log('DENTR0 DEL CATCH');
             });   

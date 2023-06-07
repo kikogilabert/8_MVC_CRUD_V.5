@@ -78,7 +78,6 @@ function send(){
 function send_email(content_email) {
 	ajaxPromise(friendlyURL("?module=contact&op=send_contact_us"), 'POST', 'JSON', content_email) 
 	.then(function (data) {
-		console.log(data);
 		toastr.success('Email sended');
 		location.reload();
 	}).catch(function(data) {

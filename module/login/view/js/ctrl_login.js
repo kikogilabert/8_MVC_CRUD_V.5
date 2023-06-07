@@ -1,4 +1,3 @@
-// console.log('holaaa');
 function login() {
     if (validate_login() != 0) {
         var id_car = localStorage.getItem('id_car');
@@ -100,7 +99,7 @@ function validate_login() {
     
 
 
-// ------------------- RECOVER PASSWORD ------------------------ //
+// --------- RECOVER PASSWORD ------------ //
 
 function load_form_recover_password(){
     $(".sign-in-htm").hide();

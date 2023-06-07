@@ -1,14 +1,10 @@
-// console.log('en el ready');
 function register() {
     if (validate_register() != 0) {
         var data = $('#register__form').serialize();
         var username = document.getElementById('username_reg').value;
-        // console.log(username);
         var password = document.getElementById('passwd1_reg').value;
-        // console.log(password);
         var email = document.getElementById('email_reg').value;
-        // console.log(email);
-        // console.log(data);
+
 
         ajaxPromise('?module=login&op=register', 'POST', 'JSON', {username, password, email})
             .then(function(result) {
@@ -44,7 +40,6 @@ function key_register() {
 
 function button_register() {
     $('#register').on('click', function(e) {
-        // parar js
         e.preventDefault();
         register();
     });
@@ -129,7 +124,6 @@ function validate_register() {
 
 
 $(document).ready(function() {
-    // load_content();
     key_register();
     button_register();
 });

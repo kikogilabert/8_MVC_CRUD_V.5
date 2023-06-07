@@ -53,11 +53,9 @@
             return $this -> bll -> get_verify_token_BLL($email_token);
         }
         public function get_new_password($args) {
-            // return 'hola1';
             return $this -> bll -> get_new_password_BLL($args);
         }
         public function get_social_login($args) {
-            // return 'hola1';
             return $this -> bll -> get_social_login_BLL($args);
         }
     }

@@ -168,23 +168,12 @@ class login_bll
 	}
 	
 	public function get_social_login_BLL($args) {
-
-		// return $args['id'];
-				//mira si el uid es de algun usuario
 		$rdo = $this -> dao -> select_social_login($this->db, $args['id']);
-
-		// return $rdo;
-
 		if (!empty($rdo)) {
-				//i le crea un token
 			$token= middleware::create_token($rdo[0]['username']);
 			return $token;
 		}
-		
 		else {
-
-			// return 'dentro de else';
-
 			$this -> dao -> insert_social_login($this->db, $args['id'], $args['username'], $args['email'], $args['avatar']);
 			$user = $this -> dao -> select_social_login($this->db, $args['id']);
 			$token=  middleware::create_token($user[0]["username"]);
